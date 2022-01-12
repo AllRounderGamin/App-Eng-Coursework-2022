@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    @import './Stylesheet.css';
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>Benji's Lego Store Cart</title>
+</head>
+
+<div id="TagMenu">
+    <button onClick="closeSidebar()">Close</button>
+    <p> Brick Type</p>
+    <div>
+        <label>Single Bricks
+            <input type="checkbox">
+        </label>
+    </div>
+    <div>
+        <label>Colour Packs
+            <input type="checkbox">
+        </label>
+    </div>
+    <div>
+        <label>Model Kits
+            <input type="checkbox">
+        </label>
+    </div>
+    <p>Brick Colour </p>
+    <div>
+        <label>Red
+            <input type="checkbox">
+        </label>
+    </div>
+    <div>
+        <label>Green
+            <input type="checkbox">
+        </label>
+    </div>
+    <div>
+        <label>Blue
+            <input type="checkbox">
+        </label>
+    </div>
+</div>
+
+<header>
+    <div id="Navigation" style="background: blue">
+        <a href = "./Landing.html" id="Logo" >
+            <img alt="Placeholder Image" src="images/placeholder.png" class = "icon">
+        </a>
+
+        <form>
+            <input type="search" placeholder="Search the Store!" id="StoreSearch" aria-label="Search Through The Store" required>
+
+            <button onClick="openSidebar()" class="button">Tags</button>
+
+            <input type="submit" value="Search" class="button">
+        </form>
+
+        <a href = "./Cart.html" id="Cart" >
+            <img alt="Placeholder Image" src="images/cart.png" class="icon">
+        </a>
+    </div>
+
+</header>
+<br><br>
+
+<body>
+<p> here at Benji's Lego Store we love Placeholders!</p>
+</body>
+</html>
+<!-- list of elements representing items in cart, could be a grid or flex columns, each item go full width (excluding a
+sidebar for options) with a rectangle mark, list items would be imported from a user cart table, isnt SQLite local? -->

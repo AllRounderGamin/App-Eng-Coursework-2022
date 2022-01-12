@@ -1,0 +1,91 @@
+body{
+    margin: 0;
+}
+
+.icon{
+    max-width: 100px;
+    max-height: 200px;
+    border-radius: 50%;
+    border: outset darkblue 0.2em;
+}
+
+form{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0.5em;
+    flex-grow: 1;
+}
+
+.button{
+    border-radius: 20%;
+    margin: 0.5em;
+}
+
+.sections{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    column-gap: 2%;
+    row-gap: 2%;
+    justify-content: space-around;
+    margin: 1em 1em 2em;
+}
+
+.sectionLink{
+    max-width: 100%;
+    max-height: 100%;
+    border: 0.2em darkblue outset;
+}
+
+#TagMenu{
+    background: cyan;
+    display: block;
+    width: 125px;
+    right: 0;
+    height: 100vh;
+    position: fixed;
+    z-index: 1;
+    margin: 0;
+    justify-content: center;
+}
+#TagMenu.inactive{
+    display: none;
+}
+
+#Navigation{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 2em;
+}
+
+#Navigation.navLink{
+    margin: 1em;
+    flex-basis: 2em;
+}
+
+#StoreSearch{
+    margin: 0.5em;
+    height: 2.5em;
+    flex-basis: 10em;
+    flex-grow: 3;
+}
+
+@media (max-width: 550px){
+
+    #Navigation {
+        flex-direction: column;
+    }
+
+    .sections{
+        display: flex;
+        flex-direction: column;
+    }
+
+    #TagMenu{
+        width: 20%;
+    }
+
+}
+
