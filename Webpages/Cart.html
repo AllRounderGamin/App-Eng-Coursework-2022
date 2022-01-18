@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="background: indianred">
 <style>
     @import './Stylesheet.css';
 </style>
 <head>
     <meta charset="UTF-8">
     <title>Benji's Lego Store Cart</title>
+    <script src="Scripts.js" type="text/javascript"></script>
 </head>
 
-<div id="TagMenu">
+<body>
+
+<div class ="inactive" id="TagMenu">
     <button onClick="closeSidebar()">Close</button>
     <p> Brick Type</p>
     <div>
@@ -44,31 +47,37 @@
     </div>
 </div>
 
-<header>
-    <div id="Navigation" style="background: blue">
-        <a href = "./Landing.html" id="Logo" >
-            <img alt="Placeholder Image" src="images/placeholder.png" class = "icon">
-        </a>
+<nav>
+    <form>
+        <div id="Navigation">
+            <a class="navLink" href="./Landing.html">
+                <img alt="Placeholder Image" class="icon" src="images/placeholder.png">
+            </a>
 
-        <form>
-            <input type="search" placeholder="Search the Store!" id="StoreSearch" aria-label="Search Through The Store" required>
+            <input aria-label="Search Through The Store" id="StoreSearch" placeholder="Search the Store!" required
+                   type="search">
 
-            <button onClick="openSidebar()" class="button">Tags</button>
+            <button class="button" onClick="openSidebar()">Tags</button>
 
-            <input type="submit" value="Search" class="button">
-        </form>
+            <input class="button" type="submit" value="Search">
 
-        <a href = "./Cart.html" id="Cart" >
-            <img alt="Placeholder Image" src="images/cart.png" class="icon">
-        </a>
+            <a class="navLink" href="./Cart.html">
+                <img alt="Placeholder Image" class="icon" src="images/cart.png">
+            </a>
+        </div>
+    </form>
+
+</nav>
+
+<div id="CartPage">
+    <div id="CartArea">
     </div>
+    <div id="CheckoutArea">
+        <h3>Checkout</h3>
+        <button class="button">Enter Card Details</button>
+    </div>
+</div>
 
-</header>
-<br><br>
-
-<body>
-<p> here at Benji's Lego Store we love Placeholders!</p>
 </body>
+<script> createCartContent() </script>
 </html>
-<!-- list of elements representing items in cart, could be a grid or flex columns, each item go full width (excluding a
-sidebar for options) with a rectangle mark, list items would be imported from a user cart table, isnt SQLite local? -->

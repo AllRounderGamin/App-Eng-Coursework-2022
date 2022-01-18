@@ -8,7 +8,6 @@
 <style>
     @import './Stylesheet.css';
 </style>
-<!-- Use rgb to set some background colour, could make images smaller and have colour work as link -->
 
 
 <head>
@@ -55,27 +54,27 @@
     </div>
 </div>
 
-<header>
-    <div id="Navigation" style="background: blue">
-        <a class="navLink" href="./Landing.html">
-            <img alt="Placeholder Image" class="icon" src="images/placeholder.png">
-        </a>
+<nav>
+    <form>
+        <div id="Navigation">
+            <a class="navLink" href="./Landing.html">
+                <img alt="Placeholder Image" class="icon" src="images/placeholder.png">
+            </a>
 
-        <form>
             <input aria-label="Search Through The Store" id="StoreSearch" placeholder="Search the Store!" required
                    type="search">
 
             <button class="button" onClick="openSidebar()">Tags</button>
 
             <input class="button" type="submit" value="Search">
-        </form>
 
-        <a class="navLink" href="./Cart.html">
-            <img alt="Placeholder Image" class="icon" src="images/cart.png">
-        </a>
-    </div>
+            <a class="navLink" href="./Cart.html">
+                <img alt="Placeholder Image" class="icon" src="images/cart.png">
+            </a>
+        </div>
+    </form>
 
-</header>
+</nav>
 
 <div class="sections">
     <a href="./Landing.html">
