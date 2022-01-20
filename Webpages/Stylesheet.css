@@ -53,6 +53,12 @@ body{
     padding: 10px;
 }
 
+.navLink{
+    margin: 0.1em 0.5em;
+    flex-basis: 2em;
+}
+
+
 #TagMenu{
     background: darkgoldenrod;
     border: black solid thin;
@@ -78,11 +84,6 @@ body{
     margin-bottom: 2em;
 }
 
-.navLink{
-    margin: 0.1em 0.5em;
-    flex-basis: 2em;
-}
-
 #StoreSearch{
     margin: 0.5em;
     height: 2.5em;
@@ -102,7 +103,7 @@ body{
     min-height: 100vh;
 }
 
-#CheckoutArea{
+#CartCheckoutArea{
     border: solid;
     position: sticky;
     top: 0;
@@ -114,6 +115,48 @@ body{
     height: 200px;
 }
 
+#checkoutArea{
+    display: flex;
+    margin: 1em;
+}
+
+#checkoutSummary{
+    border: solid;
+    margin: 0 3em 1em 0;
+    background: goldenrod;
+    overflow: scroll;
+    height: 82vh;
+    width: 45vmax;
+}
+
+#personalInfo{
+    display: flex;
+    flex-direction: column;
+    right: 0;
+}
+
+#cardInformation{
+    border: solid;
+    background:goldenrod;
+    width: 40vmax;
+    height: 25vh;
+    margin-bottom: 1em;
+}
+
+#addressInformation{
+    border: solid;
+    background: goldenrod;
+    width: 40vmax;
+    height: 40vh;
+    margin-bottom: 1em;
+}
+
+#confirmButton{
+    border: solid;
+    background: goldenrod;
+    width: 40vmax;
+    height: 10vh;
+}
 
 @media (max-width: 550px){
 
@@ -129,7 +172,7 @@ body{
         width: 100%;
     }
 
-    #CheckoutArea{
+    #CartCheckoutArea{
         width: 100%;
     }
 
@@ -140,6 +183,24 @@ body{
 
     #TagMenu{
         width: 20%;
+    }
+
+    #checkoutArea{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #checkoutSummary{
+        width: 100%;
+        margin: 1em;
+    }
+
+    #cardInformation{
+        width: 100%;
+    }
+
+    #addressInformation{
+        width: 100%;
     }
 
 }
