@@ -14,8 +14,6 @@ body{
     border: outset darkblue 0.2em;
 }
 
-
-
 .button{
     border-radius: 20%;
     margin: 0.5em;
@@ -56,7 +54,8 @@ body{
 }
 
 #TagMenu{
-    background: cyan;
+    background: darkgoldenrod;
+    border: black solid thin;
     display: block;
     width: 125px;
     right: 0;

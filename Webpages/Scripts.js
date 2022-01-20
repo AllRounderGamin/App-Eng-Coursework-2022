@@ -10,7 +10,8 @@ function closeSidebar() {
 
 
 async function createCartContent(){
-    let cartData = await fetch("./cartTestData.json");
+    let totalAmount = Number(0);
+    const cartData = await fetch("./cartTestData.json");
     const items = await cartData.json();
     const cart = document.querySelector("#CartArea");
     for (let item of items){
@@ -19,9 +20,11 @@ async function createCartContent(){
         const itemPrice = document.createElement ("h3")
         const itemImage = document.createElement("img");
 
+        const cumulativePrice = (item.singlePrice * item.amount);
+        totalAmount += cumulativePrice;
 
         itemName.textContent = item.name + " x" + item.amount.toString();
-        itemPrice.textContent = ("£" + (item.singlePrice * item.amount).toFixed(2).toString());
+        itemPrice.textContent = ("£" + cumulativePrice.toFixed(2));
         itemImage.alt = item.name;
         itemImage.src = item.src;
 
@@ -34,4 +37,6 @@ async function createCartContent(){
         cartItemDiv.appendChild(itemImage);
         cart.appendChild(cartItemDiv);
     }
+    const finalPrice = document.querySelector("#totalPrice");
+    finalPrice.textContent = "Total: £" + totalAmount.toFixed(2);
 }
