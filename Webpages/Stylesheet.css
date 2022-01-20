@@ -78,8 +78,8 @@ body{
     margin-bottom: 2em;
 }
 
-#Navigation.navLink{
-    margin: 1em;
+.navLink{
+    margin: 0.1em 0.5em;
     flex-basis: 2em;
 }
 
