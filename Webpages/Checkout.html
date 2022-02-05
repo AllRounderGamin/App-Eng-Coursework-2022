@@ -9,7 +9,7 @@
     <script src="Scripts.js" type="text/javascript"></script>
 </head>
 
-<div class ="inactive" id="TagMenu">
+<div class="inactive" id="TagMenu">
     <button onClick="closeSidebar()">Close</button>
     <p> Brick Type</p>
     <div>
@@ -55,7 +55,7 @@
             <input aria-label="Search Through The Store" id="StoreSearch" placeholder="Search the Store!" required
                    type="search">
 
-            <button class="button" onClick="openSidebar()">Tags</button>
+            <button class="button" onClick="openSidebar()" type="button">Tags</button>
 
             <input class="button" type="submit" value="Search">
 
@@ -69,18 +69,34 @@
 
 <body>
 <div id="checkoutArea">
-    <div id="checkoutSummary">
+    <div id="checkoutInfo">
+        <div id="checkoutSummary">
 
+        </div>
+        <div id="priceDisplay">
+            <h2 id="totalPrice">Total: £0</h2>
+        </div>
     </div>
     <div id="personalInfo">
-        <div id="cardInformation">
-
-        </div>
-        <div id="addressInformation">
-
-        </div>
-        <button id="confirmButton">CONFIRM</button>
+        <form>
+            <div id="cardInformation">
+                <label for="cardNum">Card Number</label>
+                <input id="cardNum" name="cardNumber" type="number">
+                <label for="expiry">Expiry Date</label>
+                <input id="expiry" name="expiryDate" type="month">
+                <label for="CSV">Security Code </label>
+                <input id="CSV" name="securityCode" type="number">
+            </div>
+            <div id="addressInformation">
+                <label for="addrLineOne">Address Line One</label>
+                <input id="addrLineOne" name="addressLineOne" type="text">
+            </div>
+            <button id="confirmButton">CONFIRM</button>
+        </form>
     </div>
 </div>
 </body>
+
+<script> createCartContent("checkoutSummary") </script>
+
 </html>

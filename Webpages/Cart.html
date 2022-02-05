@@ -11,7 +11,7 @@
 
 <body>
 
-<div class ="inactive" id="TagMenu">
+<div class="inactive" id="TagMenu">
     <button onClick="closeSidebar()">Close</button>
     <p> Brick Type</p>
     <div>
@@ -57,7 +57,7 @@
             <input aria-label="Search Through The Store" id="StoreSearch" placeholder="Search the Store!" required
                    type="search">
 
-            <button class="button" onClick="openSidebar()">Tags</button>
+            <button class="button" onClick="openSidebar()" type="button">Tags</button>
 
             <input class="button" type="submit" value="Search">
 
@@ -77,12 +77,12 @@
         <a href="./Checkout.html">
             <button class="button">Enter Card Details</button>
         </a>
-        <div id="priceDisplay">
+        <div>
             <h2 id="totalPrice">Total: £0</h2>
         </div>
     </div>
 </div>
 
 </body>
-<script> createCartContent() </script>
+<script> createCartContent("CartArea") </script>
 </html>

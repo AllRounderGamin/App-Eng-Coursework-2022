@@ -9,15 +9,15 @@ function closeSidebar() {
 }
 
 
-async function createCartContent(){
+async function createCartContent(ID) {
     let totalAmount = Number(0);
     const cartData = await fetch("./cartTestData.json");
     const items = await cartData.json();
-    const cart = document.querySelector("#CartArea");
-    for (let item of items){
+    const cart = document.getElementById(ID);
+    for (let item of items) {
         const cartItemDiv = document.createElement("div");
-        const itemName = document.createElement("h2");
-        const itemPrice = document.createElement ("h3")
+        const itemName = document.createElement("h3");
+        const itemPrice = document.createElement("h4")
         const itemImage = document.createElement("img");
 
         const cumulativePrice = (item.singlePrice * item.amount);
