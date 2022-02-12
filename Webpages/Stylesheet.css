@@ -1,7 +1,10 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     background: indianred;
     margin: 0;
-    overflow-x: hidden;
     height: 100%;
 }
 
@@ -15,22 +18,30 @@ body {
 }
 
 .button {
+    border: thin black solid;
     border-radius: 20%;
     margin: 0.5em;
 }
 
 .sections {
+    width: 100vw;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     column-gap: 2%;
     row-gap: 2%;
     justify-content: space-around;
-    margin: 1em 1em 2em;
+    margin: 1em;
+}
+
+.product {
+    max-width: 90%;
+    max-height: 100%;
+    border: 0.2em darkblue outset;
 }
 
 .sectionLink {
-    max-width: 100%;
+    width: 90%;
     max-height: 100%;
     border: 0.2em darkblue outset;
 }
@@ -50,21 +61,26 @@ body {
     margin-right: auto
 }
 
+.right {
+    right: 0;
+}
+
 .cartImage {
-    height: 40px;
+    width: 120px;
+    height: 70px;
     float: right;
     right: 0;
     padding: 10px;
 }
 
 .informationBox {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
     justify-content: center;
     border: solid;
     background: goldenrod;
     width: 80%;
-    height: 30%;
     margin-bottom: 1em;
     padding: 0.5em;
     align-items: center;
@@ -73,7 +89,6 @@ body {
 .flexPage {
     display: flex;
     align-items: flex-start;
-    gap: 1em;
 }
 
 .splitInfo {
@@ -81,11 +96,14 @@ body {
     flex-direction: column;
     width: 50%;
     height: 100vh;
-    margin-left: 1em;
+    align-items: center;
 }
 
-.splitInfo .personalInfo {
-    right: 0;
+.splitElements {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 5%;
+    column-gap: 20%;
 }
 
 #TagMenu {
@@ -97,6 +115,7 @@ body {
     height: 100%;
     position: fixed;
     z-index: 1;
+    text-align: center;
 }
 
 #TagMenu.inactive {
@@ -117,6 +136,16 @@ body {
     margin: 0.5em;
     height: 2.5em;
     flex-grow: 1;
+}
+
+#productPage {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    row-gap: 2%;
+    column-gap: 2%;
+    justify-content: space-around;
+    margin: 1em 1em 2em;
 }
 
 #CartArea {
@@ -161,8 +190,23 @@ body {
     border: solid;
     background: goldenrod;
     width: 80%;
-    height: 10%;
+    padding: 2em;
     margin-bottom: 1em;
+}
+
+#itemImage {
+    height: 40vh;
+    width: 40vw;
+}
+
+#itemPage {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    row-gap: 2%;
+    column-gap: 2%;
+    justify-content: space-around;
+    margin: 1em 1em 2em;
 }
 
 
@@ -170,6 +214,7 @@ body {
 
     .flexPage {
         flex-direction: column;
+        align-items: center;
     }
 
     .splitInfo {
@@ -187,7 +232,6 @@ body {
 
     #TagMenu {
         width: 100%;
-        text-align: center;
     }
 
     #Navigation {
@@ -205,6 +249,16 @@ body {
     #checkoutSummary {
         width: 100%;
         margin: 1em;
+    }
+
+    #itemPage {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #itemImage {
+        width: 80vw;
     }
 
 }
