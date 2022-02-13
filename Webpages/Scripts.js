@@ -70,6 +70,34 @@ async function fillProductsPage(buffer) {
 }
 
 async function fillProductInfo(params) {
-    const testHeading = document.getElementById("placeholder")
-    testHeading.textContent = params.get("name");
+    const searchQuery = params.get("name");
+    let product = null;
+    const productData = await fetch("./cartTestData.json")
+    const productList = await productData.json();
+    for (let obj of productList) {
+        console.log(obj.name, searchQuery);
+        if (obj.name === searchQuery) {
+            product = obj;
+            break;
+        }
+    }
+    if (product === null) {
+        const mainPage = document.getElementById("itemPage");
+        const warningMes = document.createElement("h1");
+
+        mainPage.style.display = "none";
+        warningMes.textContent = "Unfortunately, this product cannot be found"
+
+        document.body.appendChild(warningMes);
+    } else {
+        const itemImage = document.getElementById("itemImage");
+        const itemName = document.getElementById("itemName");
+        const itemPrice = document.getElementById("price");
+        const itemDesc = document.getElementById("desc");
+
+        itemImage.src = product.src;
+        itemName.textContent = product.name;
+        itemPrice.textContent = "£" + product.singlePrice.toFixed(2);
+        itemDesc.textContent = product.desc;
+    }
 }
