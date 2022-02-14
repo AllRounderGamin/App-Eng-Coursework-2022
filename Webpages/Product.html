@@ -80,16 +80,35 @@
         <div class="splitElements">
             <h1 id="itemName"> Item Name </h1>
             <h1 id="price"> Price </h1>
-            <h1 id="amount"> Amount </h1>
-            <h1 id="cartButton"> Add to cart </h1>
+            <div>
+                <label for="amount">Amount to Buy </label>
+                <input id="amount" name="amount" type="number">
+            </div>
+            <button id="cartButton" onclick="addToCart(new URLSearchParams(window.location.search))"> Add to Cart
+            </button>
         </div>
     </div>
-    <p id="desc"> Description </p>
+    <h3 id="desc"> Description </h3>
 </div>
 
 </body>
 
-<script> fillProductInfo(new URLSearchParams(document.location.search)) </script>
+<script> fillProductInfo(new URLSearchParams(window.location.search)) </script>
 
 
 </html>
+
+
+<!-- TODO
+Add script to add bricks into JSON file
+|
+-> window.localStorage - Lecture on Youtube
+
+Is using script to call function right or should an event handler be set up?
+
+function test() {
+    window.location.assign("http://localhost:8080/landing.html");
+}
+
+redirect to express page on success?
+-->
