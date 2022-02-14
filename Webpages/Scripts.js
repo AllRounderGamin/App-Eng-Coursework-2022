@@ -69,7 +69,69 @@ async function fillProductsPage(buffer) {
     }
 }
 
-async function fillProductInfo(params) {
-    const testHeading = document.getElementById("placeholder")
-    testHeading.textContent = params.get("name");
+async function findProduct(params) {
+    const searchQuery = params.get("name");
+    let product = null;
+    const productData = await fetch("./cartTestData.json")
+    const productList = await productData.json();
+    for (let obj of productList) {
+        if (obj.name === searchQuery) {
+            product = obj;
+            break;
+        }
+    }
+    return product;
 }
+
+function productNotFound(mes) {
+    const mainPage = document.getElementById("itemPage");
+    const warningMes = document.createElement("h1");
+
+    mainPage.style.display = "none";
+    warningMes.textContent = mes
+
+    document.body.appendChild(warningMes);
+}
+
+async function fillProductInfo(params) {
+    let product = await findProduct(params);
+    if (product === null) {
+        productNotFound("Unfortunately, this product cannot be found");
+    } else {
+        const itemImage = document.getElementById("itemImage");
+        const itemName = document.getElementById("itemName");
+        const itemPrice = document.getElementById("price");
+        const itemDesc = document.getElementById("desc");
+
+        itemImage.src = product.src;
+        itemName.textContent = product.name;
+        itemPrice.textContent = "£" + product.singlePrice.toFixed(2);
+        itemDesc.textContent = product.desc;
+    }
+}
+
+async function addToCart(params) {
+    const amount = document.getElementById("amount").value
+    let product = await findProduct(params);
+    if (product === null) {
+        productNotFound("An error occurred, please reload and try again");
+    } else {
+        product.amount = amount;
+        if (localStorage.getItem("cart")) {
+            let cart = JSON.parse(localStorage.getItem("cart"));
+            cart.push(product);
+            localStorage.setItem("cart", JSON.stringify(cart));
+        } else {
+            const cart = [];
+            cart.push(product);
+            localStorage.setItem("cart", JSON.stringify(cart));
+        }
+    }
+    window.location.assign("http://localhost:8080/cart");
+}
+
+
+/*
+
+    cookies vs local storage
+ */

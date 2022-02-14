@@ -74,22 +74,26 @@
 
 <div id="itemPage">
     <div>
-        <img alt="Placeholder" id="itemImage" src="images/placeholder.png">
+        <img alt="Item Preview" id="itemImage" src="images/placeholder.png">
     </div>
     <div>
         <div class="splitElements">
-            <h1> Item Name </h1>
-            <h1> Price </h1>
-            <h1> Amount </h1>
-            <h1> Add to cart </h1>
+            <h1 id="itemName"> Item Name </h1>
+            <h1 id="price"> Price </h1>
+            <div>
+                <label for="amount">Amount to Buy </label>
+                <input id="amount" name="amount" type="number">
+            </div>
+            <button id="cartButton" onclick="addToCart(new URLSearchParams(window.location.search))"> Add to Cart
+            </button>
         </div>
     </div>
-    <p> Description </p>
+    <h3 id="desc"> Description </h3>
 </div>
 
 </body>
 
-<script> fillProductInfo(new URLSearchParams(document.location.search)) </script>
+<script> fillProductInfo(new URLSearchParams(window.location.search)) </script>
 
 
 </html>
