@@ -11,8 +11,7 @@ function closeSidebar() {
 
 async function createCartContent(ID) {
     let totalAmount = Number(0);
-    const cartData = await fetch("./cartTestData.json");
-    const items = await cartData.json();
+    const items = JSON.parse(localStorage.getItem("cart"))
     const cart = document.getElementById(ID);
     for (let item of items) {
         const cartItemDiv = document.createElement("div");
