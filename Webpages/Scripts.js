@@ -9,7 +9,7 @@ function closeSidebar() {
 }
 
 
-async function createCartContent(ID) {
+async function createCartContent(ID, location) {
     let position = 0;
     let totalAmount = Number(0);
     const items = JSON.parse((localStorage.getItem("cart")))
@@ -53,7 +53,7 @@ function removeProduct(e) {
     let cart = JSON.parse(localStorage.getItem("cart"));
     cart.splice(parseInt(e.target.pos), 1);
     localStorage.setItem("cart", JSON.stringify(cart));
-    window.location.assign("http://localhost:8080/cart")
+    window.location.assign(window.location)
 }
 
 async function fillProductsPage(buffer) {
