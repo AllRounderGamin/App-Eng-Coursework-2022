@@ -48,7 +48,6 @@ body {
 
 .cartItem {
     background: goldenrod;
-    box-sizing: border-box;
     padding-left: 0.5em;
     margin: 1em;
     display: flex;
