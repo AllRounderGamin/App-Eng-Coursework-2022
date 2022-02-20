@@ -10,14 +10,16 @@ function closeSidebar() {
 
 
 async function createCartContent(ID) {
+    let position = 0;
     let totalAmount = Number(0);
-    const items = JSON.parse(localStorage.getItem("cart"))
+    const items = JSON.parse((localStorage.getItem("cart")))
     const cart = document.getElementById(ID);
     for (let item of items) {
         const cartItemDiv = document.createElement("div");
         const itemName = document.createElement("h3");
         const itemPrice = document.createElement("h4")
         const itemImage = document.createElement("img");
+        const removeButton = document.createElement("button");
 
         const cumulativePrice = (item.singlePrice * item.amount);
         totalAmount += cumulativePrice;
@@ -26,18 +28,32 @@ async function createCartContent(ID) {
         itemPrice.textContent = ("£" + cumulativePrice.toFixed(2));
         itemImage.alt = item.name;
         itemImage.src = item.src;
+        removeButton.value = "Remove";
+        removeButton.pos = position;
 
         itemName.classList.add("productName");
         itemImage.classList.add("cartImage");
         cartItemDiv.classList.add("cartItem");
+        removeButton.addEventListener("click", removeProduct)
+
 
         cartItemDiv.appendChild(itemName);
         cartItemDiv.appendChild(itemPrice);
         cartItemDiv.appendChild(itemImage);
+        cartItemDiv.appendChild(removeButton);
         cart.appendChild(cartItemDiv);
+
+        position++;
     }
     const finalPrice = document.querySelector("#totalPrice");
     finalPrice.textContent = "Total: £" + totalAmount.toFixed(2);
+}
+
+function removeProduct(e) {
+    let cart = JSON.parse(localStorage.getItem("cart"));
+    cart.splice(parseInt(e.target.pos), 1);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    window.location.assign("http://localhost:8080/cart")
 }
 
 async function fillProductsPage(buffer) {
