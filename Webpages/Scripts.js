@@ -125,21 +125,21 @@ async function fillProductInfo(params) {
     }
 }
 
-async function addToCart(params) {
+async function addToList(params, listName) {
     const amount = document.getElementById("amount").value
     let product = await findProduct(params);
     if (product === null) {
         productNotFound("An error occurred, please reload and try again");
     } else {
         product.amount = amount;
-        if (localStorage.getItem("cart")) {
-            let cart = JSON.parse(localStorage.getItem("cart"));
-            cart.push(product);
-            localStorage.setItem("cart", JSON.stringify(cart));
+        if (localStorage.getItem(listName)) {
+            let list = JSON.parse(localStorage.getItem(listName));
+            list.push(product);
+            localStorage.setItem(listName, JSON.stringify(list));
         } else {
-            const cart = [];
-            cart.push(product);
-            localStorage.setItem("cart", JSON.stringify(cart));
+            const list = [];
+            list.push(product);
+            localStorage.setItem(listName, JSON.stringify(list));
         }
     }
     window.location.assign("http://localhost:8080/cart");
