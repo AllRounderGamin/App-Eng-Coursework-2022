@@ -9,7 +9,7 @@ function closeSidebar() {
 }
 
 
-async function createCartContent(ID, location) {
+async function createCartContent(ID) {
     let position = 0;
     let totalAmount = Number(0);
     const items = JSON.parse((localStorage.getItem("cart")))
@@ -98,20 +98,10 @@ async function findProduct(params) {
     return product;
 }
 
-function productNotFound(mes) {
-    const mainPage = document.getElementById("itemPage");
-    const warningMes = document.createElement("h1");
-
-    mainPage.style.display = "none";
-    warningMes.textContent = mes
-
-    document.body.appendChild(warningMes);
-}
-
 async function fillProductInfo(params) {
     let product = await findProduct(params);
     if (product === null) {
-        productNotFound("Unfortunately, this product cannot be found");
+        window.location.assign("http://localhost:8080/errorPage")
     } else {
         const itemImage = document.getElementById("itemImage");
         const itemName = document.getElementById("itemName");
@@ -125,28 +115,44 @@ async function fillProductInfo(params) {
     }
 }
 
-async function addToList(params, listName) {
+async function addProduct(params, listName, redirect) {
     const amount = document.getElementById("amount").value
-    let product = await findProduct(params);
-    if (product === null) {
-        productNotFound("An error occurred, please reload and try again");
+    const product = await findProduct(params);
+    console.log(product, amount, listName, redirect)
+    await addToList(product, amount, listName, redirect);
+}
+
+async function addToList(item, amount, listName, redirect) {
+    if (item === null) {
+        window.location.assign("http://localhost:8080/errorPage")
     } else {
-        product.amount = amount;
+        item.amount = amount;
         if (localStorage.getItem(listName)) {
-            let list = JSON.parse(localStorage.getItem(listName));
-            list.push(product);
+            const list = JSON.parse(localStorage.getItem(listName));
+            list.push(item);
             localStorage.setItem(listName, JSON.stringify(list));
         } else {
             const list = [];
-            list.push(product);
+            list.push(item);
             localStorage.setItem(listName, JSON.stringify(list));
         }
     }
-    window.location.assign("http://localhost:8080/cart");
+    window.location.assign(redirect);
+}
+
+async function checkout(totalPrice) {
+    // validate info
+    await addToList(JSON.parse(localStorage.getItem("cart")), totalPrice, "recentPurchases", "http://localhost:8080/landing");
+    localStorage.setItem("cart", JSON.stringify([]));
 }
 
 
 /*
+
+    TODO
+    * Wishlist / Recent Purchase page, reuse createCartContent?
+
+
 
     cookies vs local storage
  */

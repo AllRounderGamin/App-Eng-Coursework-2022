@@ -84,16 +84,18 @@
                 <label for="amount">Amount to Buy </label>
                 <input id="amount" name="amount" type="number">
             </div>
-            <button id="cartButton" onclick="addToList(new URLSearchParams(window.location.search), 'cart')"> Add to
-                Cart
+            <button id="cartButton"
+                    onclick="addProduct(new URLSearchParams(window.location.search), 'cart', 'http://localhost:8080/cart')">
+                Add to Cart
             </button>
         </div>
     </div>
     <h3 id="desc"> Description </h3>
     <div>
         <h4> Don't want to buy right now? Why not add to your wishlist! </h4>
-        <button id="wishlistButton" onclick="addToList(new URLSearchParams(window.location.search), 'wishlist')">Add to
-            Wishlist
+        <button id="wishlistButton"
+                onclick="addProduct(new URLSearchParams(window.location.search), 'wishlist', 'http://localhost:8080/landing')">
+            Add to Wishlist
         </button>
     </div>
 </div>
