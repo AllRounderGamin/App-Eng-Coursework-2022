@@ -70,7 +70,7 @@
 <body>
 <div class="flexPage">
     <div class="splitInfo">
-        <div id="checkoutSummary">
+        <div class="checkoutSummary" id="ListArea">
         </div>
         <div id="priceDisplay">
             <h2 id="totalPrice">Total: £0</h2>
@@ -108,11 +108,17 @@
             <label for="billingPostcode">Postcode</label>
             <input id="billingPostcode" name="postcode" type="text">
         </div>
-        <button id="confirmButton" onclick="checkout()">CONFIRM</button>
+        <button id="confirmButton" onclick="checkout()">CONFIRM
+        </button>
     </div>
 </div>
 </body>
 
-<script> createCartContent("checkoutSummary") </script>
+<script>
+    loadList("cart")
+    if (!(localStorage.getItem("cart")) || localStorage.getItem("cart").length === 0) {
+        const checkoutButton = document.getElementById("confirmButton")
+        checkoutButton.disabled = true;
+    } </script>
 
 </html>

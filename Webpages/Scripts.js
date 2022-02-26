@@ -9,13 +9,16 @@ function closeSidebar() {
 }
 
 
-async function createCartContent(ID) {
+async function loadList(listName) {
     let position = 0;
     let totalAmount = Number(0);
-    const items = JSON.parse((localStorage.getItem("cart")))
-    const cart = document.getElementById(ID);
+    const items = JSON.parse((localStorage.getItem(listName)))
+    if (!items) {
+        return;
+    }
+    const list = document.getElementById("ListArea");
     for (let item of items) {
-        const cartItemDiv = document.createElement("div");
+        const itemDiv = document.createElement("div");
         const itemName = document.createElement("h3");
         const itemPrice = document.createElement("h4")
         const itemImage = document.createElement("img");
@@ -30,30 +33,79 @@ async function createCartContent(ID) {
         itemImage.src = item.src;
         removeButton.value = "Remove";
         removeButton.pos = position;
+        removeButton.list = listName;
 
         itemName.classList.add("productName");
         itemImage.classList.add("cartImage");
-        cartItemDiv.classList.add("cartItem");
-        removeButton.addEventListener("click", removeProduct)
+        itemDiv.classList.add("cartItem");
+        removeButton.addEventListener("click", removeProduct);
 
 
-        cartItemDiv.appendChild(itemName);
-        cartItemDiv.appendChild(itemPrice);
-        cartItemDiv.appendChild(itemImage);
-        cartItemDiv.appendChild(removeButton);
-        cart.appendChild(cartItemDiv);
+        itemDiv.appendChild(itemName);
+        itemDiv.appendChild(itemPrice);
+        itemDiv.appendChild(itemImage);
+        itemDiv.appendChild(removeButton);
+        list.appendChild(itemDiv);
 
         position++;
     }
-    const finalPrice = document.querySelector("#totalPrice");
-    finalPrice.textContent = "Total: £" + totalAmount.toFixed(2);
+    if (listName !== "Wishlist") {
+        const finalPrice = document.querySelector("#totalPrice");
+        finalPrice.textContent = "Total: £" + totalAmount.toFixed(2);
+    }
+}
+
+async function loadRecent() {
+    let position = 0;
+    const items = JSON.parse(localStorage.getItem("recentPurchases"));
+    const list = document.getElementById("ListArea");
+    if (!items) {
+        return;
+    }
+    for (let item of items) {
+        const itemDiv = document.createElement("div");
+        const itemName = document.createElement("h3");
+        const itemPrice = document.createElement("h4")
+        const itemImage = document.createElement("img");
+
+        itemName.textContent = item.name;
+        itemPrice.textContent = item.amount;
+        itemImage.alt = item.name;
+        itemImage.src = item.src;
+        itemImage.pos = position;
+
+        itemName.classList.add("productName");
+        itemImage.classList.add("cartImage");
+        itemDiv.classList.add("cartItem");
+
+        itemDiv.appendChild(itemName);
+        itemDiv.appendChild(itemPrice);
+        itemDiv.appendChild(itemImage);
+        list.appendChild(itemDiv);
+
+        position++;
+    }
 }
 
 function removeProduct(e) {
-    let cart = JSON.parse(localStorage.getItem("cart"));
-    cart.splice(parseInt(e.target.pos), 1);
-    localStorage.setItem("cart", JSON.stringify(cart));
-    window.location.assign(window.location)
+    let list = JSON.parse(localStorage.getItem(e.target.list));
+    list.splice(parseInt(e.target.pos), 1);
+    localStorage.setItem(e.target.list, JSON.stringify(list));
+    window.location.assign(window.location);
+}
+
+async function changeList(e) {
+    let test = document.getElementById("ListArea")
+    while (test.hasChildNodes()) {
+        test.removeChild(test.firstChild);
+    }
+    const listName = e.target.value;
+    if (listName === "Choose List...") {
+    } else if (listName !== "Recent Purchases") {
+        await loadList(listName);
+    } else {
+        await loadRecent();
+    }
 }
 
 async function fillProductsPage(buffer) {
@@ -66,8 +118,6 @@ async function fillProductsPage(buffer) {
         const itemImage = document.createElement("img");
         const productName = document.createElement("h3");
 
-        console.log(products[i + buffer])
-        console.log(products);
         if (products[i + buffer]) {
             productName.textContent = products[i + buffer].name;
             itemImage.alt = productName.textContent;
@@ -76,7 +126,7 @@ async function fillProductsPage(buffer) {
 
             itemImage.classList.add("product");
 
-            itemLink.appendChild(itemImage)
+            itemLink.appendChild(itemImage);
             productDiv.appendChild(itemLink);
             productDiv.appendChild(productName);
             productPage.appendChild(productDiv);
@@ -87,7 +137,7 @@ async function fillProductsPage(buffer) {
 async function findProduct(params) {
     const searchQuery = params.get("name");
     let product = null;
-    const productData = await fetch("./cartTestData.json")
+    const productData = await fetch("./products.json")
     const productList = await productData.json();
     for (let obj of productList) {
         if (obj.name === searchQuery) {
@@ -116,9 +166,11 @@ async function fillProductInfo(params) {
 }
 
 async function addProduct(params, listName, redirect) {
-    const amount = document.getElementById("amount").value
+    let amount = document.getElementById("amount").value
+    if (amount === 0) {
+        amount = 1;
+    }
     const product = await findProduct(params);
-    console.log(product, amount, listName, redirect)
     await addToList(product, amount, listName, redirect);
 }
 
@@ -140,19 +192,13 @@ async function addToList(item, amount, listName, redirect) {
     window.location.assign(redirect);
 }
 
-async function checkout(totalPrice) {
+async function checkout() {
     // validate info
-    await addToList(JSON.parse(localStorage.getItem("cart")), totalPrice, "recentPurchases", "http://localhost:8080/landing");
-    localStorage.setItem("cart", JSON.stringify([]));
+    const cart = JSON.parse(localStorage.getItem("cart"));
+    const image = cart[0].src;
+    const date = new Date();
+    const totalPrice = document.getElementById('totalPrice').textContent
+    const purchase = {"cart": cart, "src": image, name: date.toDateString() + " " + cart[0].name + "..."};
+    await addToList(purchase, totalPrice, "recentPurchases", "http://localhost:8080/landing");
+    localStorage.removeItem("cart");
 }
-
-
-/*
-
-    TODO
-    * Wishlist / Recent Purchase page, reuse createCartContent?
-
-
-
-    cookies vs local storage
- */
