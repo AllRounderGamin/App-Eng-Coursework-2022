@@ -67,12 +67,51 @@ async function loadRecent() {
         const itemName = document.createElement("h3");
         const itemPrice = document.createElement("h4")
         const itemImage = document.createElement("img");
+        const itemLink = document.createElement("a");
 
         itemName.textContent = item.name;
         itemPrice.textContent = item.amount;
         itemImage.alt = item.name;
         itemImage.src = item.src;
         itemImage.pos = position;
+        itemLink.href = "purchaseReview?num=" + position;
+
+        itemName.classList.add("productName");
+        itemImage.classList.add("cartImage");
+        itemDiv.classList.add("cartItem");
+
+        itemLink.appendChild(itemImage);
+        itemDiv.appendChild(itemName);
+        itemDiv.appendChild(itemPrice);
+        itemDiv.appendChild(itemLink);
+        list.appendChild(itemDiv);
+
+        position++;
+    }
+}
+
+async function loadPurchase(params) {
+    const num = params.get("num");
+    let totalAmount = Number(0);
+    let items = JSON.parse(localStorage.getItem("recentPurchases"));
+    if (!items) {
+        return;
+    }
+    items = items[num].cart;
+    const list = document.getElementById("ListArea");
+    for (let item of items) {
+        const itemDiv = document.createElement("div");
+        const itemName = document.createElement("h3");
+        const itemPrice = document.createElement("h4")
+        const itemImage = document.createElement("img");
+
+        const cumulativePrice = (item.singlePrice * item.amount);
+        totalAmount += cumulativePrice;
+
+        itemName.textContent = item.name + " x" + item.amount.toString();
+        itemPrice.textContent = ("£" + cumulativePrice.toFixed(2));
+        itemImage.alt = item.name;
+        itemImage.src = item.src;
 
         itemName.classList.add("productName");
         itemImage.classList.add("cartImage");
@@ -81,10 +120,10 @@ async function loadRecent() {
         itemDiv.appendChild(itemName);
         itemDiv.appendChild(itemPrice);
         itemDiv.appendChild(itemImage);
-        list.appendChild(itemDiv);
-
-        position++;
+        list.appendChild(itemDiv)
     }
+    const finalPrice = document.querySelector("#totalPrice");
+    finalPrice.textContent = "Total: £" + totalAmount.toFixed(2);
 }
 
 function removeProduct(e) {
