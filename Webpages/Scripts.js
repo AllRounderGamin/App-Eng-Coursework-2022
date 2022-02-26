@@ -151,7 +151,7 @@ async function findProduct(params) {
 async function fillProductInfo(params) {
     let product = await findProduct(params);
     if (product === null) {
-        window.location.assign("http://localhost:8080/errorPage")
+        window.location.replace("http://localhost:8080/errorPage")
     } else {
         const itemImage = document.getElementById("itemImage");
         const itemName = document.getElementById("itemName");
