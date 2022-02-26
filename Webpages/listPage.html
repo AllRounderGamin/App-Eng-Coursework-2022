@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <style>
     @import './Stylesheet.css';
 </style>
+
 <head>
     <meta charset="UTF-8">
-    <title>Benji's Lego Store Cart</title>
+    <title>Your List</title>
     <script src="Scripts.js" type="text/javascript"></script>
 </head>
-
-<body>
 
 <div class="inactive" id="TagMenu">
     <button onClick="closeSidebar()">Close</button>
@@ -69,26 +69,23 @@
 
 </nav>
 
-<div class="flexPage">
-    <div id="ListArea">
-    </div>
-    <div id="CartCheckoutArea">
-        <h3>Checkout</h3>
-        <a href="./Checkout.html">
-            <button class="button" id="checkoutButton">Enter Card Details</button>
-        </a>
-        <div>
-            <h2 id="totalPrice">Total: £0</h2>
-        </div>
-    </div>
-</div>
+<body>
+<div id="ListPage">
+    <label for="listChoice">Choose list to display</label>
+    <select id="listChoice">
+        <option>Choose List...</option>
+        <option>Wishlist</option>
+        <option>Recent Purchases</option>
+    </select>
+    <div class="wide" id="ListArea">
 
+    </div>
+
+</div>
 </body>
+
 <script>
-    loadList("cart")
-    if (!(localStorage.getItem("cart")) || localStorage.getItem("cart").length === 0) {
-        const checkoutButton = document.getElementById("checkoutButton")
-        checkoutButton.disabled = true;
-    }
+    const dropDown = document.getElementById("listChoice");
+    dropDown.addEventListener("change", changeList);
 </script>
 </html>
