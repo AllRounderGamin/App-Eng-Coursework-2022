@@ -18,32 +18,17 @@ async function loadList(listName) {
     }
     const list = document.getElementById("ListArea");
     for (let item of items) {
-        const itemDiv = document.createElement("div");
-        const itemName = document.createElement("h3");
-        const itemPrice = document.createElement("h4")
-        const itemImage = document.createElement("img");
-        const removeButton = document.createElement("button");
-
-        const cumulativePrice = (item.singlePrice * item.amount);
+        const cumulativePrice = item.singlePrice * item.amount;
+        const itemName = item.name + " x" + item.amount.toString();
+        let itemDiv = await createDefaults(item, itemName, cumulativePrice, "product?name=" + encodeURIComponent(item.name));
         totalAmount += cumulativePrice;
 
-        itemName.textContent = item.name + " x" + item.amount.toString();
-        itemPrice.textContent = ("£" + cumulativePrice.toFixed(2));
-        itemImage.alt = item.name;
-        itemImage.src = item.src;
+        const removeButton = document.createElement("button");
         removeButton.value = "Remove";
         removeButton.pos = position;
         removeButton.list = listName;
-
-        itemName.classList.add("productName");
-        itemImage.classList.add("cartImage");
-        itemDiv.classList.add("cartItem");
         removeButton.addEventListener("click", removeProduct);
 
-
-        itemDiv.appendChild(itemName);
-        itemDiv.appendChild(itemPrice);
-        itemDiv.appendChild(itemImage);
         itemDiv.appendChild(removeButton);
         list.appendChild(itemDiv);
 
@@ -63,29 +48,8 @@ async function loadRecent() {
         return;
     }
     for (let item of items) {
-        const itemDiv = document.createElement("div");
-        const itemName = document.createElement("h3");
-        const itemPrice = document.createElement("h4")
-        const itemImage = document.createElement("img");
-        const itemLink = document.createElement("a");
-
-        itemName.textContent = item.name;
-        itemPrice.textContent = item.amount;
-        itemImage.alt = item.name;
-        itemImage.src = item.src;
-        itemImage.pos = position;
-        itemLink.href = "purchaseReview?num=" + position;
-
-        itemName.classList.add("productName");
-        itemImage.classList.add("cartImage");
-        itemDiv.classList.add("cartItem");
-
-        itemLink.appendChild(itemImage);
-        itemDiv.appendChild(itemName);
-        itemDiv.appendChild(itemPrice);
-        itemDiv.appendChild(itemLink);
+        let itemDiv = await createDefaults(item, item.name, item.amount, "purchaseReview?num=" + position);
         list.appendChild(itemDiv);
-
         position++;
     }
 }
@@ -100,30 +64,40 @@ async function loadPurchase(params) {
     items = items[num].cart;
     const list = document.getElementById("ListArea");
     for (let item of items) {
-        const itemDiv = document.createElement("div");
-        const itemName = document.createElement("h3");
-        const itemPrice = document.createElement("h4")
-        const itemImage = document.createElement("img");
-
         const cumulativePrice = (item.singlePrice * item.amount);
+        const itemName = item.name + " x" + item.amount.toString();
+        const itemDiv = await createDefaults(item, itemName, cumulativePrice, "product?name=" + encodeURIComponent(item.name))
         totalAmount += cumulativePrice;
 
-        itemName.textContent = item.name + " x" + item.amount.toString();
-        itemPrice.textContent = ("£" + cumulativePrice.toFixed(2));
-        itemImage.alt = item.name;
-        itemImage.src = item.src;
-
-        itemName.classList.add("productName");
-        itemImage.classList.add("cartImage");
-        itemDiv.classList.add("cartItem");
-
-        itemDiv.appendChild(itemName);
-        itemDiv.appendChild(itemPrice);
-        itemDiv.appendChild(itemImage);
         list.appendChild(itemDiv)
     }
     const finalPrice = document.querySelector("#totalPrice");
     finalPrice.textContent = "Total: £" + totalAmount.toFixed(2);
+}
+
+async function createDefaults(item, name, price, link) {
+    const itemDiv = document.createElement("div");
+    const itemName = document.createElement("h3");
+    const itemPrice = document.createElement("h4")
+    const itemImage = document.createElement("img");
+    const itemLink = document.createElement("a");
+
+    itemName.textContent = name;
+    itemPrice.textContent = price;
+    itemImage.alt = item.name;
+    itemImage.src = item.src;
+    itemLink.href = link;
+
+    itemName.classList.add("productName");
+    itemImage.classList.add("cartImage");
+    itemDiv.classList.add("cartItem");
+
+    itemLink.appendChild(itemImage);
+    itemDiv.appendChild(itemName);
+    itemDiv.appendChild(itemPrice);
+    itemDiv.appendChild(itemLink);
+
+    return itemDiv;
 }
 
 function removeProduct(e) {
