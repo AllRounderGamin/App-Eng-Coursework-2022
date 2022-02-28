@@ -45,7 +45,7 @@ async function loadList(listName) {
 
 async function loadRecent() {
     let position = 0;
-    const items = JSON.parse(localStorage.getItem("recentPurchases"));
+    const items = JSON.parse(localStorage.getItem("recentPurchases")).reverse();
     const list = document.getElementById("ListArea");
     if (!items) {
         return;
