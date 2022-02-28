@@ -8,6 +8,9 @@ function closeSidebar() {
     menu.classList.add("inactive");
 }
 
+function redirect(link) {
+    window.location.assign(link);
+}
 
 async function loadList(listName) {
     let position = 0;

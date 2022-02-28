@@ -59,6 +59,9 @@
 
             <input class="button" type="submit" value="Search">
 
+            <button class="button" onClick="redirect('http://localhost:8080/listPage')" type="button">Your Lists
+            </button>
+
             <a href="./Cart.html">
                 <img alt="Placeholder Image" class="icon" src="images/cart.png">
             </a>
@@ -88,10 +91,12 @@
         </div>
         <h3>Delivery Address</h3>
         <div class="informationBox" id="deliveryInformation">
+            <label for="deliveryName">Name</label>
+            <input id="deliveryName" type="text">
             <label for="deliveryLineOne">Address Line One</label>
             <input id="deliveryLineOne" name="addressLineOne" type="text">
             <label for="deliveryLineTwo">Address Line Two</label>
-            <input id="deliveryLineTwo" name="addressLineOne" type="text">
+            <input id="deliveryLineTwo" name="addressLineTwo" type="text">
             <label for="deliveryCity">City</label>
             <input id="deliveryCity" name="city" type="text">
             <label for="deliveryPostcode">Postcode</label>
@@ -99,6 +104,8 @@
         </div>
         <h3>Billing Address</h3>
         <div class="informationBox" id="billingInformation">
+            <label for="billingName">Name</label>
+            <input id="billingName" type="text">
             <label for="billingLineOne">Address Line One</label>
             <input id="billingLineOne" name="addressLineOne" type="text">
             <label for="billingLineTwo">Address Line Two</label>
