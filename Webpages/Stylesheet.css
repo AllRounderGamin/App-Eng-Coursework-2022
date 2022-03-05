@@ -24,7 +24,6 @@ body {
 }
 
 .sections {
-    width: 100vw;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
@@ -52,7 +51,6 @@ body {
     margin: 1em;
     display: flex;
     width: 95%;
-    height: 10vh;
     border-radius: 10%;
 }
 

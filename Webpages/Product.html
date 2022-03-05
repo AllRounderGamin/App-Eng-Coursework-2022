@@ -1,18 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<style>
-    @import "./stylesheet.css";
-</style>
-
 <head>
+    <style> @import './Stylesheet.css'; </style>
     <meta charset="UTF-8">
     <title>Benji's Lego Store</title>
-    <script src="Scripts.js" type="text/javascript"></script>
 </head>
 
 <div class="inactive" id="TagMenu">
-    <button onClick="closeSidebar()">Close</button>
+    <button id="closeSidebar">Close</button>
     <p> Brick Type</p>
     <div>
         <label>Single Bricks
@@ -57,11 +53,12 @@
             <input aria-label="Search Through The Store" id="StoreSearch" placeholder="Search the Store!" required
                    type="search">
 
-            <button class="button" onClick="openSidebar()" type="button">Tags</button>
+            <button class="button" id="openSidebar" type="button">Tags</button>
 
             <input class="button" type="submit" value="Search">
 
-            <button class="button" onClick="redirect('http://localhost:8080/listPage')" type="button">Your Lists
+            <button class="button" id="listButton" redirectlink="http://localhost:8080/listPage" type="button">Your
+                Lists
             </button>
 
             <a href="./Cart.html">
@@ -86,25 +83,41 @@
                 <label for="amount">Amount to Buy </label>
                 <input id="amount" name="amount" type="number">
             </div>
-            <button id="cartButton"
-                    onclick="addProduct(new URLSearchParams(window.location.search), 'cart', 'http://localhost:8080/cart')">
-                Add to Cart
-            </button>
+            <button id="cartButton" listName="cart" redirectLink="http://localhost:8080/cart">Add to Cart</button>
         </div>
     </div>
     <h3 id="desc"> Description </h3>
     <div>
         <h4> Don't want to buy right now? Why not add to your wishlist! </h4>
-        <button id="wishlistButton"
-                onclick="addProduct(new URLSearchParams(window.location.search), 'Wishlist', 'http://localhost:8080/landing')">
-            Add to Wishlist
-        </button>
+        <button id="wishlistButton" link="http://localhost:8080/cart" listName="wishlist"> Add to Wishlist</button>
     </div>
 </div>
 
 </body>
 
-<script> fillProductInfo(new URLSearchParams(window.location.search)) </script>
+<script type="module">
+    import {openSidebar, closeSidebar, redirect} from "./Scripts/baseScripts.js";
+    import {fillProductInfo, addProduct} from "./Scripts/productsAPI.js";
+
+    await fillProductInfo(new URLSearchParams(window.location.search));
+
+    const cartButton = document.querySelector("#cartButton");
+    cartButton.setAttribute("itemName", document.querySelector("#itemName").textContent);
+    cartButton.addEventListener("click", addProduct);
+
+    const wishButton = document.querySelector("#wishlistButton")
+    wishButton.setAttribute("itemName", document.querySelector("#itemName").textContent)
+    wishButton.addEventListener("click", addProduct);
+
+    const openSide = document.querySelector("#openSidebar");
+    const closeSide = document.querySelector("#closeSidebar");
+    const listButton = document.querySelector("#listButton");
+
+    openSide.addEventListener("click", openSidebar);
+    closeSide.addEventListener("click", closeSidebar);
+    listButton.addEventListener("click", redirect);
+
+</script>
 
 
 </html>

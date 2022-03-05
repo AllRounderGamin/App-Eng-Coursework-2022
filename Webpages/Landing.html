@@ -5,21 +5,16 @@
 <script src="https://cdn.auth0.com/js/auth0-spa-js/1.13/auth0-spa-js.production.js" async defer></script>
 -->
 
-<style>
-    @import './Stylesheet.css';
-</style>
-
-
 <head>
+    <style> @import './Stylesheet.css'; </style>
     <meta charset="UTF-8">
     <title>Benji's Lego Store</title>
-    <script src="Scripts.js" type="text/javascript"></script>
 </head>
 
 <body>
 
 <div class="inactive" id="TagMenu">
-    <button onClick="closeSidebar()">Close</button>
+    <button id="closeSidebar">Close</button>
     <p> Brick Type</p>
     <div>
         <label>Single Bricks
@@ -64,11 +59,12 @@
             <input aria-label="Search Through The Store" id="StoreSearch" placeholder="Search the Store!" required
                    type="search">
 
-            <button class="button" onClick="openSidebar()" type="button">Tags</button>
+            <button class="button" id="openSidebar" type="button">Tags</button>
 
             <input class="button" type="submit" value="Search">
 
-            <button class="button" onClick="redirect('http://localhost:8080/listPage')" type="button">Your Lists
+            <button class="button" id="listButton" redirectlink="http://localhost:8080/listPage" type="button">Your
+                Lists
             </button>
 
             <a href="./Cart.html">
@@ -98,6 +94,19 @@
 </div>
 
 </body>
+
+<script type="module">
+    import {openSidebar, closeSidebar, redirect} from "./Scripts/baseScripts.js";
+
+    const openSide = document.querySelector("#openSidebar");
+    const closeSide = document.querySelector("#closeSidebar");
+    const listButton = document.querySelector("#listButton");
+
+    openSide.addEventListener("click", openSidebar);
+    closeSide.addEventListener("click", closeSidebar);
+    listButton.addEventListener("click", redirect);
+
+</script>
 
 </html>
 
