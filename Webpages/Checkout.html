@@ -83,6 +83,8 @@
         <div class="informationBox" id="cardInformation">
             <label for="cardNum">Card Number</label>
             <input id="cardNum" name="cardNumber" type="number">
+            <p> Card Type: </p>
+            <p id="CardIdentity">Enter Card Number</p>
             <label for="expiry">Expiry Date</label>
             <input id="expiry" name="expiryDate" type="month">
             <label for="CSV">Security Code </label>
@@ -123,10 +125,13 @@
 <script type="module">
     import {openSidebar, closeSidebar, redirect} from "./Scripts/baseScripts.js";
     import {loadList} from "./Scripts/fetchLists.js"
-    import {checkout} from "./Scripts/checkout.js"
+    import {checkout, verifyCardNum} from "./Scripts/checkout.js"
 
     const checkoutButton = document.querySelector("#confirmButton")
     checkoutButton.addEventListener("click", checkout);
+    const cardNum = document.querySelector("#cardNum");
+    cardNum.addEventListener("change", verifyCardNum);
+
     loadList("cart")
     if (!(localStorage.getItem("cart"))) {
         checkoutButton.disabled = true;
