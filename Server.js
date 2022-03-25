@@ -4,11 +4,12 @@ const app = express();
 
 app.use(express.static("Webpages", {extensions: ['html']}));
 
-function redirects(req, res) {
-    res.redirect("landing.html")
+function redirect(req, res) {
+    const page = req.params.page;
+    res.redirect("/");
 }
 
-app.get("/", redirects)
+app.get('/:page', redirect)
 
 
 console.log("Server Listening!");

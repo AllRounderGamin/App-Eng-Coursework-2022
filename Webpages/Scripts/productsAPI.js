@@ -1,9 +1,10 @@
 import {addToList} from "./fetchLists.js";
+import {loadFromUrl} from "./pageLoading.js";
 
 export async function fillProductsPage(buffer) {
     const productData = await fetch("./products.json");
     const products = await productData.json();
-    const productPage = document.getElementById("productPage");
+    const productPage = document.querySelector("#productPage");
     for (let i = 0; i < 12; i++) {
         const productDiv = document.createElement("div");
         const itemLink = document.createElement("a");
@@ -14,7 +15,7 @@ export async function fillProductsPage(buffer) {
             productName.textContent = products[i + buffer].name;
             itemImage.alt = productName.textContent;
             itemImage.src = products[i + buffer].src;
-            itemLink.href = "product?name=" + encodeURIComponent(productName.textContent);
+            itemLink.href = "?page=product&name=" + encodeURIComponent(productName.textContent);
 
             itemImage.classList.add("product");
 
@@ -42,7 +43,8 @@ async function findProduct(name) {
 export async function fillProductInfo(params) {
     let product = await findProduct(params.get("name"));
     if (product === null) {
-        window.location.replace("http://localhost:8080/errorPage")
+        window.history.replaceState(null, "", "?page=error");
+        await loadFromUrl();
     } else {
         const itemImage = document.getElementById("itemImage");
         const itemName = document.getElementById("itemName");

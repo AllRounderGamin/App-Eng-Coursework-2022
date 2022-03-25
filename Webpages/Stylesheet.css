@@ -15,6 +15,7 @@ body {
     border-radius: 50%;
     border: outset darkblue 0.2em;
     margin: 0.1em 0.5em;
+    cursor: pointer;
 }
 
 .button {
@@ -43,6 +44,7 @@ body {
     max-width: 100%;
     max-height: 100%;
     border: 0.2em darkblue outset;
+    cursor: pointer;
 }
 
 .cartItem {
