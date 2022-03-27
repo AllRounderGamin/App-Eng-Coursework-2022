@@ -15,6 +15,7 @@ body {
     border-radius: 50%;
     border: outset darkblue 0.2em;
     margin: 0.1em 0.5em;
+    cursor: pointer;
 }
 
 .button {
@@ -43,6 +44,7 @@ body {
     max-width: 100%;
     max-height: 100%;
     border: 0.2em darkblue outset;
+    cursor: pointer;
 }
 
 .cartItem {
@@ -145,7 +147,7 @@ body {
     margin: 1em 1em 2em;
 }
 
-#ListArea {
+.ListArea {
     border: solid;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
@@ -154,11 +156,11 @@ body {
     height: 100%;
 }
 
-#ListArea.wide {
+.ListArea.wide {
     width: 90vw;
 }
 
-#ListArea.checkoutSummary {
+.ListArea.checkoutSummary {
     overflow: hidden auto;
     height: 70%;
     width: 90%;
@@ -209,7 +211,7 @@ body {
     margin: 1em 1em 2em;
 }
 
-#ListPage {
+.ListPage {
     display: flex;
     flex-direction: column;
     align-items: center;

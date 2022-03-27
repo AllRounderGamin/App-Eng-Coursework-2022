@@ -4,9 +4,9 @@ export async function checkout() {
     const cart = JSON.parse(localStorage.getItem("cart"));
     const image = cart[0].src;
     const date = new Date();
-    const totalPrice = document.getElementById('totalPrice').textContent
+    const totalPrice = document.querySelector('#totalPrice').textContent
     const purchase = {"cart": cart, "src": image, name: date.toDateString() + " " + cart[0].name + "..."};
-    await addToList(purchase, totalPrice, "recentPurchases", "http://localhost:8080/landing");
+    await addToList(purchase, totalPrice, "recentPurchases", "/");
     localStorage.removeItem("cart");
 }
 
@@ -53,7 +53,7 @@ function cardType(num) {
         case "5":
             return "MasterCard";
         case "6":
-            return "Discover Card"
+            return "Discover Card";
         case "3":
             switch (num.toString()[1]) {
                 case "4" || "7":
@@ -61,6 +61,8 @@ function cardType(num) {
                 case "0" || "6" || "8":
                     return "Carte Blanche";
             }
+            break;
+        default:
+            return "Unknown Card Type";
     }
-    return "Unknown Card Type";
 }
