@@ -4,7 +4,7 @@ export async function checkout() {
     const cart = JSON.parse(localStorage.getItem("cart"));
     const image = cart[0].src;
     const date = new Date();
-    const totalPrice = document.getElementById('totalPrice').textContent
+    const totalPrice = document.querySelector('#totalPrice').textContent
     const purchase = {"cart": cart, "src": image, name: date.toDateString() + " " + cart[0].name + "..."};
     await addToList(purchase, totalPrice, "recentPurchases", "/");
     localStorage.removeItem("cart");

@@ -1,7 +1,7 @@
 import {loadFromUrl} from "./pageLoading.js";
 
 export async function changeList(e) {
-    const test = document.getElementById("ListArea")
+    const test = document.querySelector("#ListArea")
     while (test.hasChildNodes()) {
         test.removeChild(test.firstChild);
     }
@@ -68,7 +68,7 @@ export function loadList(listName) {
     if (!items) {
         return;
     }
-    const list = document.getElementById("ListArea");
+    const list = document.querySelector("#ListArea");
     for (let item of items) {
         const cumulativePrice = item.singlePrice * item.amount;
         const itemName = item.name + " x" + item.amount.toString();
@@ -95,7 +95,7 @@ export function loadList(listName) {
 async function loadRecent() {
     let position = 0;
     const items = JSON.parse(localStorage.getItem("recentPurchases")).reverse();
-    const list = document.getElementById("ListArea");
+    const list = document.querySelector("#ListArea");
     if (!items) {
         return;
     }
@@ -116,7 +116,7 @@ export function loadPurchase(params) {
         return;
     }
     items = items[num].cart;
-    const list = document.getElementById("ListArea");
+    const list = document.querySelector("#ListArea");
     for (let item of items) {
         const cumulativePrice = (item.singlePrice * item.amount);
         const itemName = item.name + " x" + item.amount.toString();

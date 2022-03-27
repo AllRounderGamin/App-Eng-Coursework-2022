@@ -46,10 +46,10 @@ export async function fillProductInfo(params) {
         window.history.replaceState(null, "", "?page=error");
         await loadFromUrl();
     } else {
-        const itemImage = document.getElementById("itemImage");
-        const itemName = document.getElementById("itemName");
-        const itemPrice = document.getElementById("price");
-        const itemDesc = document.getElementById("desc");
+        const itemImage = document.querySelector("#itemImage");
+        const itemName = document.querySelector("#itemName");
+        const itemPrice = document.querySelector("#price");
+        const itemDesc = document.querySelector("#desc");
 
         itemImage.src = product.src;
         itemName.textContent = product.name;
@@ -59,7 +59,7 @@ export async function fillProductInfo(params) {
 }
 
 export async function addProduct(e) {
-    let amount = document.getElementById("amount").value
+    let amount = document.querySelector("#amount").value
     if (amount === 0) {
         amount = 1;
     }
