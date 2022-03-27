@@ -86,10 +86,10 @@
 <template id="checkout">
     <div class="flexPage">
         <div class="splitInfo">
-            <div class="checkoutSummary" id="ListArea">
+            <div class="checkoutSummary ListArea">
             </div>
             <div id="priceDisplay">
-                <h2 id="totalPrice">Total: £0</h2>
+                <h2 class="totalPrice">Total: £0</h2>
             </div>
         </div>
         <div class="splitInfo right">
@@ -137,10 +137,10 @@
 </template>
 
 <template id="lists">
-    <div id="ListPage">
+    <div class="ListPage">
         <button class="button" id="showWishlist" listName="Wishlist">Wishlist</button>
         <button class="button" id="showRecent" listName="Recent Purchases">Recent Purchases</button>
-        <div class="wide" id="ListArea">
+        <div class="wide ListArea">
 
         </div>
 
@@ -182,8 +182,8 @@
 </template>
 
 <template id="review">
-    <div id="ListPage">
-        <div class="wide" id="ListArea">
+    <div class="ListPage">
+        <div class="wide ListArea">
 
         </div>
         <h2 id="totalPrice">Total: £0</h2>
@@ -192,9 +192,6 @@
 
 <template id="error">
     <h1 id="message">Unfortunately, an error occurred, please try again.</h1>
-    <!-- remember to change references to window.assign in scripts -->
 </template>
-
-<!-- TODO Change conflicting IDs to classes -->
 
 </html>

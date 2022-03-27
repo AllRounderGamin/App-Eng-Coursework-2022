@@ -147,7 +147,7 @@ body {
     margin: 1em 1em 2em;
 }
 
-#ListArea {
+.ListArea {
     border: solid;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
@@ -156,11 +156,11 @@ body {
     height: 100%;
 }
 
-#ListArea.wide {
+.ListArea.wide {
     width: 90vw;
 }
 
-#ListArea.checkoutSummary {
+.ListArea.checkoutSummary {
     overflow: hidden auto;
     height: 70%;
     width: 90%;
@@ -211,7 +211,7 @@ body {
     margin: 1em 1em 2em;
 }
 
-#ListPage {
+.ListPage {
     display: flex;
     flex-direction: column;
     align-items: center;
