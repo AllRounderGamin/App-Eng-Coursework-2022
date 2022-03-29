@@ -1,0 +1,82 @@
+[
+  {
+    "id": null,
+    "name": "Single Red Brick",
+    "stock": 1000,
+    "price": 0.05,
+    "desc": "A single Red brick",
+    "src": "./images/placeholder.png"
+  },
+  {
+    "id": null,
+    "name": "Single Green Brick",
+    "stock": 1000,
+    "price": 0.05,
+    "desc": "A single green brick",
+    "src": "./images/placeholder.png"
+  },
+  {
+    "id": null,
+    "name": "Single Blue Brick",
+    "stock": 1000,
+    "price": 0.05,
+    "desc": "A single blue brick",
+    "src": "./images/placeholder.png"
+  },
+  {
+    "id": null,
+    "name": "Single White Brick",
+    "stock": 1000,
+    "price": 0.05,
+    "desc": "A single white brick",
+    "src": "./images/placeholder.png"
+  },
+  {
+    "id": null,
+    "name": "Single Black Brick",
+    "stock": 1000,
+    "price": 0.05,
+    "desc": "A single black brick",
+    "src": "./images/placeholder.png"
+  },
+  {
+    "id": null,
+    "name": "Single Yellow Brick",
+    "stock": 1000,
+    "price": 0.05,
+    "desc": "A single yellow brick",
+    "src": "./images/placeholder.png"
+  },
+  {
+    "id": null,
+    "name": "Single Purple Brick",
+    "stock": 1000,
+    "price": 0.05,
+    "desc": "A single purple brick",
+    "src": "./images/placeholder.png"
+  },
+  {
+    "id": null,
+    "name": "Single Orange Brick",
+    "stock": 1000,
+    "price": 0.05,
+    "desc": "A single orange brick",
+    "src": "./images/placeholder.png"
+  },
+  {
+    "id": null,
+    "name": "Single Pink Brick",
+    "stock": 1000,
+    "price": 0.05,
+    "desc": "A single pink brick",
+    "src": "./images/placeholder.png"
+  },
+  {
+    "id": null,
+    "name": "Single Gray Brick",
+    "stock": 1000,
+    "price": 0.05,
+    "desc": "A single gray brick",
+    "src": "./images/placeholder.png"
+  }
+]
