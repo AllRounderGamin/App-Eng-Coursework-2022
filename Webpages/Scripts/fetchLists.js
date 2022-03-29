@@ -1,9 +1,11 @@
+import {loadFromUrl} from "./pageLoading.js";
+
 export async function changeList(e) {
-    let test = document.getElementById("ListArea")
+    const test = document.querySelector(".ListArea")
     while (test.hasChildNodes()) {
         test.removeChild(test.firstChild);
     }
-    const listName = e.target.value;
+    const listName = e.target.attributes.listname.textContent;
     if (listName === "Choose List...") {
     } else if (listName !== "Recent Purchases") {
         await loadList(listName);
@@ -14,7 +16,8 @@ export async function changeList(e) {
 
 export async function addToList(item, amount, listName, redirect) {
     if (item === null) {
-        window.location.assign("http://localhost:8080/errorPage")
+        window.history.replaceState(null, "", "?page=error");
+        await loadFromUrl();
     } else {
         item.amount = amount;
         if (localStorage.getItem(listName)) {
@@ -27,10 +30,11 @@ export async function addToList(item, amount, listName, redirect) {
             localStorage.setItem(listName, JSON.stringify(list));
         }
     }
-    window.location.assign(redirect);
+    window.history.pushState(null, "", "?page=" + redirect)
+    await loadFromUrl();
 }
 
-async function createDefaults(item, name, price, link) {
+function createDefaults(item, name, price, link) {
     const itemDiv = document.createElement("div");
     const itemName = document.createElement("h3");
     const itemPrice = document.createElement("h4")
@@ -57,18 +61,18 @@ async function createDefaults(item, name, price, link) {
 }
 
 
-export async function loadList(listName) {
+export function loadList(listName) {
     let position = 0;
     let totalAmount = Number(0);
     const items = JSON.parse((localStorage.getItem(listName)))
     if (!items) {
         return;
     }
-    const list = document.getElementById("ListArea");
+    const list = document.querySelector(".ListArea");
     for (let item of items) {
         const cumulativePrice = item.singlePrice * item.amount;
         const itemName = item.name + " x" + item.amount.toString();
-        let itemDiv = await createDefaults(item, itemName, cumulativePrice, "product?name=" + encodeURIComponent(item.name));
+        let itemDiv = createDefaults(item, itemName, cumulativePrice, "?page=product&name=" + encodeURIComponent(item.name));
         totalAmount += cumulativePrice;
 
         const removeButton = document.createElement("button");
@@ -83,7 +87,7 @@ export async function loadList(listName) {
         position++;
     }
     if (listName !== "Wishlist") {
-        const finalPrice = document.querySelector("#totalPrice");
+        const finalPrice = document.querySelector(".totalPrice");
         finalPrice.textContent = "Total: £" + totalAmount.toFixed(2);
     }
 }
@@ -91,12 +95,12 @@ export async function loadList(listName) {
 async function loadRecent() {
     let position = 0;
     const items = JSON.parse(localStorage.getItem("recentPurchases")).reverse();
-    const list = document.getElementById("ListArea");
+    const list = document.querySelector(".ListArea");
     if (!items) {
         return;
     }
     for (let item of items) {
-        let itemDiv = await createDefaults(item, item.name, 0, "purchaseReview?num=" + position);
+        let itemDiv = await createDefaults(item, item.name, 0, "?page=purchaseReview&num=" + position);
         let price = itemDiv.querySelector(".productPrice");
         price.textContent = item.amount;
         list.appendChild(itemDiv);
@@ -104,7 +108,7 @@ async function loadRecent() {
     }
 }
 
-export async function loadPurchase(params) {
+export function loadPurchase(params) {
     const num = params.get("num");
     let totalAmount = Number(0);
     let items = JSON.parse(localStorage.getItem("recentPurchases")).reverse();
@@ -112,11 +116,11 @@ export async function loadPurchase(params) {
         return;
     }
     items = items[num].cart;
-    const list = document.getElementById("ListArea");
+    const list = document.querySelector(".ListArea");
     for (let item of items) {
         const cumulativePrice = (item.singlePrice * item.amount);
         const itemName = item.name + " x" + item.amount.toString();
-        const itemDiv = await createDefaults(item, itemName, cumulativePrice, "product?name=" + encodeURIComponent(item.name))
+        const itemDiv = createDefaults(item, itemName, cumulativePrice, "?page=product&name=" + encodeURIComponent(item.name))
         totalAmount += cumulativePrice;
 
         list.appendChild(itemDiv)
@@ -125,7 +129,7 @@ export async function loadPurchase(params) {
     finalPrice.textContent = "Total: £" + totalAmount.toFixed(2);
 }
 
-function removeProduct(e) {
+async function removeProduct(e) {
     let list = JSON.parse(localStorage.getItem(e.target.list));
     list.splice(parseInt(e.target.pos), 1);
     if (list.length === 0) {
@@ -133,5 +137,5 @@ function removeProduct(e) {
     } else {
         localStorage.setItem(e.target.list, JSON.stringify(list));
     }
-    window.location.assign(window.location);
+    await loadFromUrl(new URLSearchParams(window.location).get("page"));
 }

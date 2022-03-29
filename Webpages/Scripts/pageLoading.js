@@ -106,7 +106,6 @@ function setUp() {
 
 export async function loadFromUrl() {
     const page = new URLSearchParams(window.location.search).get("page");
-    console.log(page);
     switch (page) {
         case null:
             homePage();
