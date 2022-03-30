@@ -63,15 +63,15 @@ async function productsPage() {
 async function productPage() {
     loadPage("product");
     const params = new URLSearchParams((window.location.search));
-    await fillProductInfo(params);
+    if (await fillProductInfo(params)) {
+        const cartButton = document.querySelector("#cartButton");
+        cartButton.setAttribute("itemName", document.querySelector("#itemName").textContent);
+        cartButton.addEventListener("click", addProduct);
 
-    const cartButton = document.querySelector("#cartButton");
-    cartButton.setAttribute("itemName", document.querySelector("#itemName").textContent);
-    cartButton.addEventListener("click", addProduct);
-
-    const wishButton = document.querySelector("#wishlistButton")
-    wishButton.setAttribute("itemName", document.querySelector("#itemName").textContent)
-    wishButton.addEventListener("click", addProduct);
+        const wishButton = document.querySelector("#wishlistButton")
+        wishButton.setAttribute("itemName", document.querySelector("#itemName").textContent)
+        wishButton.addEventListener("click", addProduct);
+    }
 }
 
 function reviewPage() {
