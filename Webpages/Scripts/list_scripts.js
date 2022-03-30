@@ -18,6 +18,7 @@ export async function addToList(item, amount, listName, redirect) {
     if (item === null) {
         window.history.replaceState(null, "", "?page=error");
         await loadFromUrl();
+        return;
     } else {
         item.amount = amount;
         if (localStorage.getItem(listName)) {

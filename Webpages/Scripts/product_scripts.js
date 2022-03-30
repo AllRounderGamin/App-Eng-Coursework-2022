@@ -1,4 +1,4 @@
-import {addToList} from "./fetchLists.js";
+import {addToList} from "./list_scripts.js";
 import {loadFromUrl} from "./pageLoading.js";
 
 export async function fillProductsPage(buffer) {
@@ -45,6 +45,7 @@ export async function fillProductInfo(params) {
     if (product === null) {
         window.history.replaceState(null, "", "?page=error");
         await loadFromUrl();
+        return false;
     } else {
         const itemImage = document.querySelector("#itemImage");
         const itemName = document.querySelector("#itemName");
@@ -55,6 +56,7 @@ export async function fillProductInfo(params) {
         itemName.textContent = product.name;
         itemPrice.textContent = "£" + product.singlePrice.toFixed(2);
         itemDesc.textContent = product.desc;
+        return true;
     }
 }
 

@@ -1,6 +1,6 @@
-import {addToList} from "./fetchLists.js";
+import {addToList} from "./list_scripts.js";
 
-export async function checkout() {
+export async function checkOut() {
     const cart = JSON.parse(localStorage.getItem("cart"));
     const image = cart[0].src;
     const date = new Date();
