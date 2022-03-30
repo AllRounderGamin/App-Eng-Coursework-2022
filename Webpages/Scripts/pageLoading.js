@@ -1,7 +1,7 @@
-import {closeSidebar, openSidebar} from "./baseScripts.js";
-import {changeList, loadList, loadPurchase} from "./fetchLists.js"
-import {checkout, verifyCardNum} from "./checkout.js"
-import {addProduct, fillProductInfo, fillProductsPage} from "./productsAPI.js";
+import {closeSidebar, openSidebar} from "./base_scripts.js";
+import {changeList, loadList, loadPurchase} from "./list_scripts.js"
+import {checkOut, verifyCardNum} from "./checkout.js"
+import {addProduct, fillProductInfo, fillProductsPage} from "./product_scripts.js";
 
 export function loadPage(pageID) {
     const pageArea = document.querySelector("#pageArea");
@@ -15,7 +15,7 @@ export function checkoutPage() {
     loadPage("checkout");
 
     const checkoutButton = document.querySelector("#confirmButton")
-    checkoutButton.addEventListener("click", checkout);
+    checkoutButton.addEventListener("click", checkOut);
     const cardNum = document.querySelector("#cardNum");
     cardNum.addEventListener("change", verifyCardNum);
 

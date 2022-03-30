@@ -4,7 +4,7 @@ For Jacek:
 
 ### To recreate issue:
 
-    - Run Server.js manually
+    - Run server.js manually
     - Go to localhost:8080
     - Select top left image, and any image on the next page
     - Change the "name" parameter in the url to something random

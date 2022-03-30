@@ -1,4 +1,4 @@
-import {addToList} from "./fetchLists.js";
+import {addToList} from "./list_scripts.js";
 import {loadFromUrl} from "./pageLoading.js";
 
 export async function fillProductsPage(buffer) {
