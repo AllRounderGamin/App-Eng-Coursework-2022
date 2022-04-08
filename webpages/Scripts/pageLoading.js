@@ -14,7 +14,7 @@ export function loadPage(pageID) {
 export function loadCheckoutPage() {
     loadPage("checkout");
 
-    const checkoutButton = document.querySelector("#confirmButton")
+    const checkoutButton = document.querySelector("#confirmButton");
     checkoutButton.addEventListener("click", checkOut);
     const cardNum = document.querySelector("#cardNum");
     cardNum.addEventListener("change", verifyCardNum);
@@ -110,6 +110,9 @@ export async function loadFromUrl() {
         case null:
             loadHomePage();
             break;
+        case "home":
+            loadHomePage();
+            break
         case "checkout":
             loadCheckoutPage();
             break;

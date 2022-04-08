@@ -2,19 +2,19 @@ import {addToList} from "./list_scripts.js";
 import {loadFromUrl} from "./pageLoading.js";
 
 export async function fillProductsPage(buffer) {
-    const productData = await fetch("./products.json");
+    const productData = await fetch("http://localhost:8080/allproducts/" + buffer);
     const products = await productData.json();
     const productPage = document.querySelector("#productPage");
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < 8; i++) {
         const productDiv = document.createElement("div");
         const itemLink = document.createElement("a");
         const itemImage = document.createElement("img");
         const productName = document.createElement("h3");
 
-        if (products[i + buffer]) {
-            productName.textContent = products[i + buffer].name;
+        if (products[i]) {
+            productName.textContent = products[i].name;
             itemImage.alt = productName.textContent;
-            itemImage.src = products[i + buffer].src;
+            itemImage.src = products[i].src;
             itemLink.href = "?page=product&name=" + encodeURIComponent(productName.textContent);
 
             itemImage.classList.add("product");
@@ -28,20 +28,12 @@ export async function fillProductsPage(buffer) {
 }
 
 async function findProduct(name) {
-    let product = null;
-    const productData = await fetch("./products.json")
-    const productList = await productData.json();
-    for (let obj of productList) {
-        if (obj.name === name) {
-            product = obj;
-            break;
-        }
-    }
-    return product;
+    const response = await fetch("http://localhost:8080/productinfo/" + encodeURIComponent(name));
+    return await response.json();
 }
 
 export async function fillProductInfo(params) {
-    let product = await findProduct(params.get("name"));
+    const product = await findProduct(params.get("name"));
     if (product === null) {
         window.history.replaceState(null, "", "?page=error");
         await loadFromUrl();
@@ -54,7 +46,7 @@ export async function fillProductInfo(params) {
 
         itemImage.src = product.src;
         itemName.textContent = product.name;
-        itemPrice.textContent = "£" + product.singlePrice.toFixed(2);
+        itemPrice.textContent = "£" + product.price.toFixed(2);
         itemDesc.textContent = product.desc;
         return true;
     }

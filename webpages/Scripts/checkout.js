@@ -4,9 +4,10 @@ export async function checkOut() {
     const cart = JSON.parse(localStorage.getItem("cart"));
     const image = cart[0].src;
     const date = new Date();
-    const totalPrice = document.querySelector('#totalPrice').textContent
+    const totalPrice = document.querySelector('#priceDisplay').textContent
     const purchase = {"cart": cart, "src": image, name: date.toDateString() + " " + cart[0].name + "..."};
-    await addToList(purchase, totalPrice, "recentPurchases", "/");
+    await removeStock(cart);
+    await addToList(purchase, totalPrice, "recentPurchases", "home");
     localStorage.removeItem("cart");
 }
 
@@ -21,6 +22,12 @@ export function verifyCardNum(e) {
         return;
     }
     text.textContent = cardType(e.target.value);
+}
+
+async function removeStock(cart) {
+    for (let item of cart) {
+        const response = await fetch("http://localhost:8080/stock/" + item.name + "/" + item.amount);
+    }
 }
 
 function Luhn(num) {

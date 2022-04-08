@@ -1,8 +1,9 @@
-const express = require('express');
+import * as db from './database.js';
+import express from 'express';
 
 const app = express();
 
-app.use(express.static("Webpages", {extensions: ['html']}));
+app.use(express.static("webpages", {extensions: ['html']}));
 
 function asyncWrap(func) {
     return (req, res, next) => {
@@ -11,8 +12,28 @@ function asyncWrap(func) {
     };
 }
 
+async function findBrickInfo(req, res) {
+    res.json(await db.findBrick(req.params.product));
+}
+
+async function showAllProducts(req, res) {
+    res.json(await db.returnBrickList(req.params.buffer));
+}
+
+async function adjustBrickStock(req, res) {
+    await db.adjustStock(req.params.brick, req.params.amount);
+    res.sendStatus(200);
+}
+
+async function restock(req, res) {
+    await db.restock();
+    res.send("Shop Restocked!").status(200);
+}
+
+app.get('/productinfo/:product', asyncWrap(findBrickInfo));
+app.get('/allproducts/:buffer', asyncWrap(showAllProducts));
+app.get('/stock/:brick/:amount', asyncWrap(adjustBrickStock));
+app.get('/restock', asyncWrap(restock));
+
 console.log("Server Listening!");
 app.listen(8080);
-
-
-// make function async, call by app.get(asyncWrap(functionName)
