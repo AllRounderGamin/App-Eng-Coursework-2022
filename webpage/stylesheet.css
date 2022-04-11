@@ -139,7 +139,7 @@ body {
 
 #productPage {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
     row-gap: 2%;
     column-gap: 2%;
@@ -226,6 +226,10 @@ body {
     align-items: center;
 }
 
+.productLink {
+    width: 40vh;
+    height: 40vh;
+}
 
 @media (max-width: 700px) {
 

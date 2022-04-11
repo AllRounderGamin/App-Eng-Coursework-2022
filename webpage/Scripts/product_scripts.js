@@ -6,7 +6,7 @@ export async function fillProductsPage(buffer) {
     const products = await productData.json();
     const productPage = document.querySelector("#productPage");
     let finalPage = false;
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 4; i++) {
         if (products[i]) {
             const productDiv = document.createElement("div");
             const itemLink = document.createElement("a");
@@ -23,6 +23,7 @@ export async function fillProductsPage(buffer) {
             itemLink.appendChild(itemImage);
             productDiv.appendChild(itemLink);
             productDiv.appendChild(productName);
+            productDiv.classList.add("productLink");
             productPage.appendChild(productDiv);
         } else {
             finalPage = true;

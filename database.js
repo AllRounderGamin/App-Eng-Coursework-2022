@@ -32,5 +32,5 @@ export async function restock() {
 
 export async function returnBrickList(offset) {
     const db = await dbConn;
-    return db.all('SELECT * FROM Bricks LIMIT 8 OFFSET ?', offset)
+    return db.all('SELECT * FROM Bricks LIMIT 4 OFFSET ?', offset)
 }

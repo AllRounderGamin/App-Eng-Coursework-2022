@@ -17,7 +17,7 @@ async function findBrickInfo(req, res) {
 }
 
 async function showAllProducts(req, res) {
-    res.json(await db.returnBrickList(((req.params.pageNum - 1) * 8)));
+    res.json(await db.returnBrickList(((req.params.pageNum - 1) * 4)));
 }
 
 async function adjustBrickStock(req, res) {
