@@ -34,5 +34,3 @@ export async function returnBrickList(offset) {
     const db = await dbConn;
     return db.all('SELECT * FROM Bricks LIMIT 8 OFFSET ?', offset)
 }
-
-// could also use npm nanoid or uuid-random instead of relying off of name
