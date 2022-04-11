@@ -26,7 +26,7 @@ export async function restock() {
     const db = await dbConn;
     const stock = await db.all('SELECT * FROM Bricks');
     for (let item of stock) {
-        await db.run('UPDATE Bricks SET stock=1000 WHERE name = ?', item.name);
+        await db.run('UPDATE Bricks SET stock=10000 WHERE name = ?', item.name);
     }
 }
 

@@ -17,7 +17,7 @@ async function findBrickInfo(req, res) {
 }
 
 async function showAllProducts(req, res) {
-    res.json(await db.returnBrickList(req.params.buffer));
+    res.json(await db.returnBrickList(((req.params.pageNum - 1) * 8)));
 }
 
 async function adjustBrickStock(req, res) {
@@ -31,7 +31,7 @@ async function restock(req, res) {
 }
 
 app.get('/productinfo/:product', asyncWrap(findBrickInfo));
-app.get('/allproducts/:buffer', asyncWrap(showAllProducts));
+app.get('/allproducts/:pageNum', asyncWrap(showAllProducts));
 app.get('/stock/:brick/:amount', asyncWrap(adjustBrickStock));
 app.get('/restock', asyncWrap(restock));
 
