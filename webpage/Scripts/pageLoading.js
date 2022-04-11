@@ -14,7 +14,7 @@ export function loadPage(pageID) {
 export function loadCheckoutPage() {
     loadPage("checkout");
 
-    const checkoutButton = document.querySelector("#confirmButton")
+    const checkoutButton = document.querySelector("#confirmButton");
     checkoutButton.addEventListener("click", checkOut);
     const cardNum = document.querySelector("#cardNum");
     cardNum.addEventListener("change", verifyCardNum);
@@ -56,8 +56,13 @@ function loadHomePage() {
 
 async function loadProductsPage() {
     loadPage("products");
-    await fillProductsPage(0)
-    history.pushState(null, "", "/?page=products")
+    const pageNum = new URLSearchParams((window.location.search)).get("pageNum") || 1;
+    history.replaceState(null, "", "/?page=products&pageNum=" + pageNum);
+    await fillProductsPage(pageNum)
+
+    const pageTracker = document.querySelector("#currentPage");
+    pageTracker.textContent = "Current Page: " + pageNum;
+
 }
 
 async function loadProductPage() {
@@ -110,6 +115,9 @@ export async function loadFromUrl() {
         case null:
             loadHomePage();
             break;
+        case "home":
+            loadHomePage();
+            break
         case "checkout":
             loadCheckoutPage();
             break;

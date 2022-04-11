@@ -5,6 +5,7 @@
     <title>Benji's Lego Store</title>
     <style> @import 'stylesheet.css'; </style>
     <script src="./Scripts/pageLoading.js" type="module"></script>
+    <link href="./images/b%20logo.png" rel="icon">
 </head>
 <body>
 
@@ -137,7 +138,7 @@
 </template>
 
 <template id="lists">
-    <div class="ListPage">
+    <div class="flexColumn">
         <button class="button" id="showWishlist" listName="Wishlist">Wishlist</button>
         <button class="button" id="showRecent" listName="Recent Purchases">Recent Purchases</button>
         <div class="wide ListArea">
@@ -151,6 +152,11 @@
     <div id="productPage">
 
     </div>
+    <div id="pageButtons">
+        <button class="pageButton" id="prevPage">Previous Page</button>
+        <p id="currentPage"> Current Page: </p>
+        <button class="pageButton" id="nextPage">Next Page</button>
+    </div>
 </template>
 
 <template id="product">
@@ -162,8 +168,9 @@
             <div class="splitElements">
                 <h1 id="itemName"> Item Name </h1>
                 <h1 id="price"> Price </h1>
-                <div>
-                    <label for="amount">Amount to Buy </label>
+                <div class="flexColumn">
+                    <p id="stockAmount"></p>
+                    <label for="amount">Amount to Buy: </label>
                     <input id="amount" name="amount" type="number">
                 </div>
                 <button id="cartButton" listName="cart" redirectLink="checkout">Add to
@@ -182,7 +189,7 @@
 </template>
 
 <template id="review">
-    <div class="ListPage">
+    <div class="flexColumn">
         <div class="wide ListArea">
 
         </div>

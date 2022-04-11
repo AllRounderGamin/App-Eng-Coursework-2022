@@ -211,7 +211,16 @@ body {
     margin: 1em 1em 2em;
 }
 
-.ListPage {
+#pageButtons {
+    display: flex;
+    justify-content: center;
+}
+
+.pageButton {
+    margin: 0 5vw;
+}
+
+.flexColumn {
     display: flex;
     flex-direction: column;
     align-items: center;
