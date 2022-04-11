@@ -3,7 +3,7 @@ import express from 'express';
 
 const app = express();
 
-app.use(express.static("webpages", {extensions: ['html']}));
+app.use(express.static("webpage", {extensions: ['html']}));
 
 function asyncWrap(func) {
     return (req, res, next) => {
