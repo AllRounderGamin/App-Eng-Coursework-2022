@@ -8,6 +8,8 @@ CREATE TABLE Kits
     desc   TEXT,
     bricks TEXT,
     src    TEXT
-)
+);
 
 -- Drop
+
+DROP TABLE Kits
