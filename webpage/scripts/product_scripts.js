@@ -1,8 +1,8 @@
 import {addToList} from "./list_scripts.js";
 import {loadFromUrl} from "./pageLoading.js";
 
-export async function fillProductsPage(buffer) {
-    const productData = await fetch("http://localhost:8080/allproducts/" + buffer);
+export async function fillProductsPage(url) {
+    const productData = await fetch(url);
     const products = await productData.json();
     const productPage = document.querySelector("#productPage");
     let finalPage = false;
@@ -78,6 +78,11 @@ export async function fillProductInfo(params) {
         itemName.textContent = product.name;
         itemPrice.textContent = "£" + product.price.toFixed(2);
         itemDesc.textContent = product.desc;
+        if (product.stock < 1) {
+            stockAmount.textContent = "OUT OF STOCK"
+            document.querySelector("#checkoutButton").disabled = true;
+            return true;
+        }
         stockAmount.textContent = "In stock: " + product.stock;
         itemAmount.setAttribute("max", product.stock);
         return true;
@@ -86,7 +91,7 @@ export async function fillProductInfo(params) {
 
 export async function addProduct(e) {
     let amount = document.querySelector("#amount")
-    if (amount.value === 0 || amount > amount.max) {
+    if (amount.value === 0 || amount > amount.max || amount < 1) {
         window.history.replaceState(null, "", "?page=error");
         await loadFromUrl();
         return;

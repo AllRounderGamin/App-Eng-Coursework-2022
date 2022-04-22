@@ -1,4 +1,3 @@
-import {closeSidebar, openSidebar} from "./base_scripts.js";
 import {changeList, loadList, loadPurchase} from "./list_scripts.js"
 import {checkOut, verifyCardNum} from "./checkout.js"
 import {addProduct, fillProductInfo, fillProductsPage} from "./product_scripts.js";
@@ -58,11 +57,29 @@ async function loadProductsPage() {
     loadPage("products");
     const pageNum = new URLSearchParams((window.location.search)).get("pageNum") || 1;
     history.replaceState(null, "", "/?page=products&pageNum=" + pageNum);
-    await fillProductsPage(pageNum)
+    await fillProductsPage("http://localhost:8080/allproducts/" + pageNum);
 
     const pageTracker = document.querySelector("#currentPage");
     pageTracker.textContent = "Current Page: " + pageNum;
 
+}
+
+async function searchStore() {
+    const query = document.querySelector("#StoreSearch").value
+    history.replaceState(null, "", "/?page=search&query=" + query + "&pageNum=1");
+    await loadFromUrl();
+}
+
+async function loadSearch() {
+    loadPage("products");
+    const params = new URLSearchParams(window.location.search);
+    const pageNum = params.get("pageNum") || 1;
+    const query = params.get("query");
+    history.replaceState(null, "", "/?page=search&query=" + query + "&pageNum=" + pageNum);
+    await fillProductsPage("http://localhost:8080/search/" + query + "/" + pageNum);
+
+    const pageTracker = document.querySelector("#currentPage");
+    pageTracker.textContent = "Current Page: " + pageNum;
 }
 
 async function loadProductPage() {
@@ -95,16 +112,27 @@ function clearBody() {
     }
 }
 
+function sidebar() {
+    const sidebar = document.querySelector("#TagMenu");
+    if (sidebar.classList.contains("inactive")) {
+        sidebar.classList.remove("inactive");
+    } else {
+        sidebar.classList.add("inactive");
+    }
+}
+
 function setUp() {
     const openSide = document.querySelector("#openSidebar");
     const closeSide = document.querySelector("#closeSidebar");
     const homeButton = document.querySelector("#homeButton");
+    const searchButton = document.querySelector("#searchButton")
     const listButton = document.querySelector("#listButton");
     const checkoutButton = document.querySelector("#checkoutButton");
 
-    openSide.addEventListener("click", openSidebar);
-    closeSide.addEventListener("click", closeSidebar);
+    openSide.addEventListener("click", sidebar);
+    closeSide.addEventListener("click", sidebar);
     homeButton.addEventListener("click", loadHomePage);
+    searchButton.addEventListener("click", searchStore);
     listButton.addEventListener("click", loadListPage);
     checkoutButton.addEventListener("click", loadCheckoutPage);
 }
@@ -123,6 +151,9 @@ export async function loadFromUrl() {
             break;
         case "products":
             await loadProductsPage();
+            break;
+        case "search":
+            await loadSearch();
             break;
         case "product":
             await loadProductPage();

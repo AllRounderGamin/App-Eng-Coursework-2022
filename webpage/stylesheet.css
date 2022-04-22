@@ -37,13 +37,13 @@ body {
 .product {
     max-width: 90%;
     max-height: 100%;
-    border: 0.2em darkblue outset;
+    border: 0.2em black outset;
 }
 
 .sectionLink {
     max-width: 100%;
     max-height: 100%;
-    border: 0.2em darkblue outset;
+    border: 0.2em black outset;
     cursor: pointer;
 }
 

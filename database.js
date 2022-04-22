@@ -3,7 +3,7 @@ import sqlite3 from 'sqlite3';
 
 async function init() {
     const db = await open({filename: "./Lego_Database.sqlite", driver: sqlite3.Database});
-    await db.migrate({migrationsPath: "./Migrations"});
+    await db.migrate({migrationsPath: "./migrations"});
     return db;
 }
 
@@ -20,6 +20,12 @@ export async function adjustStock(brickName, amount) {
     const brick = await findBrick(brickName);
     const newStock = brick.stock - amount;
     await db.run('UPDATE Bricks SET stock=? WHERE name = ?', newStock, brick.name);
+}
+
+export async function searchStock(query, offset) {
+    const db = await dbConn;
+    query = "%" + query + "%";
+    return db.all('SELECT * FROM Bricks WHERE name LIKE ? LIMIT 4 OFFSET ?', query, offset);
 }
 
 export async function restock() {

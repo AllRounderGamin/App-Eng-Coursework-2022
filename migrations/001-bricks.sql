@@ -20,18 +20,6 @@ VALUES ('Single Red Brick', 0.05, 10000, 'A Single Red Brick', './images/red_bri
        ('Single Pink Brick', 0.06, 10000, 'A Single Pink Brick', './images/pink_brick.png'),
        ('Single Gray Brick', 0.04, 10000, 'A Single Gray Brick', './images/gray_brick.png');
 
-/*
-CREATE TABLE Kits
-(
-    id    CHAR(36) PRIMARY KEY,
-    name  TEXT,
-    price REAL,
-    stock INTEGER,
-    desc  TEXT,
-    src   TEXT
-);
-  */
-
 -- Down
 
 Drop TABLE Bricks;
