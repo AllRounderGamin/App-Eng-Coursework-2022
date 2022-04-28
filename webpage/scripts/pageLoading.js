@@ -75,7 +75,6 @@ async function loadSearch() {
     const params = new URLSearchParams(window.location.search);
     const pageNum = params.get("pageNum") || 1;
     const query = params.get("query");
-    history.replaceState(null, "", "/?page=search&query=" + query + "&pageNum=" + pageNum);
     await fillProductsPage("http://localhost:8080/search/" + query + "/" + pageNum);
 
     const pageTracker = document.querySelector("#currentPage");
