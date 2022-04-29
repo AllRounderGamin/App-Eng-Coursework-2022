@@ -5,7 +5,6 @@ const fetchAuthConfig = () => fetch("/auth_config.json");
 export async function configureClient() {
     const response = await fetchAuthConfig();
     const config = await response.json();
-
     auth0 = await createAuth0Client({
         domain: config.domain,
         client_id: config.clientId
@@ -14,17 +13,12 @@ export async function configureClient() {
 
 async function updateUI() {
     const authenticated = await auth0.isAuthenticated();
-    console.log(authenticated);
-    if (authenticated) {
-        document.querySelector("#logout").removeAttribute("disabled");
-    } else {
-        document.querySelector("#login").removeAttribute("disabled");
-    }
+    document.querySelector("#logout").disabled = !authenticated;
+    document.querySelector("#login").disabled = authenticated;
 }
 
 async function handleRedirect() {
     const query = window.location.search;
-    console.log(query);
     if (query.includes("code=") && query.includes("state=")) {
         await auth0.handleRedirectCallback();
         window.history.replaceState(null, document.title, "/");

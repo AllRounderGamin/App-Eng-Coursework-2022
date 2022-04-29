@@ -49,7 +49,12 @@ function loadHomePage() {
     groups.addEventListener("click", loadProductsPage);
     kits.addEventListener("click", loadProductsPage);
     BYOK.addEventListener("click", loadProductsPage);
-
+    const query = window.location.search;
+    if (query.includes("code=")) {
+        console.log("skipped pushstate");
+        return
+    }
+    console.log("PageLoading pushed state");
     history.pushState(null, "", "/");
 }
 
