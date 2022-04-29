@@ -5,6 +5,8 @@
     <title>Benji's Lego Store</title>
     <style> @import 'stylesheet.css'; </style>
     <script src="scripts/pageLoading.js" type="module"></script>
+    <script src="scripts/auth.js" type="module"></script>
+    <script src="https://cdn.auth0.com/js/auth0-spa-js/1.13/auth0-spa-js.production.js"></script>
     <link href="./images/b%20logo.png" rel="icon">
 </head>
 <body>
@@ -49,7 +51,7 @@
     <form>
         <div id="Navigation">
 
-            <img alt="Placeholder Image" class="icon" id="homeButton" src="images/placeholder.png">
+            <img alt="Placeholder Image" class="icon" id="homeButton" src="images/b%20logo.png">
 
             <input aria-label="Search Through The Store" id="StoreSearch" placeholder="Search the Store!" required
                    type="search">
@@ -61,6 +63,10 @@
             <button class="button" id="listButton" pageID="http://localhost:8080/listPage" type="button">Your
                 Lists
             </button>
+
+            <button class="button" id="login" type="button">Login</button>
+            <button class="button" id="logout" type="button">Logout</button>
+
 
             <img alt="Placeholder Image" class="icon" id="checkoutButton" src="images/cart.png">
 
@@ -77,10 +83,8 @@
 
 <template id="landing">
     <div class="sections">
-        <img alt="Placeholder Image" class="sectionLink" id="singleBricks" src="images/placeholder.png">
-        <img alt="Placeholder Image" class="sectionLink" id="groupedBricks" src="images/placeholder.png">
-        <img alt="Placeholder Image" class="sectionLink" id="legoKits" src="images/placeholder.png">
-        <img alt="Placeholder Image" class="sectionLink" id="buildYourOwn" src="images/placeholder.png">
+        <img alt="Placeholder Image" class="sectionLink" id="singleBricks" src="images/single.jpg">
+        <img alt="Placeholder Image" class="sectionLink" id="legoKits" src="images/kits.jpg">
     </div>
 </template>
 

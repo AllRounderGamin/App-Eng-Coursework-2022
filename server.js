@@ -34,11 +34,16 @@ async function restock(req, res) {
     res.send("Shop Restocked!").status(200);
 }
 
+function sendConfig(req, res) {
+    res.sendFile("auth_config.json", {root: '.'});
+}
+
 app.get('/productinfo/:product', asyncWrap(findBrickInfo));
 app.get('/allproducts/:pageNum', asyncWrap(showAllProducts));
 app.get('/search/:query/:pageNum', asyncWrap(searchStock))
 app.get('/stock/:brick/:amount', asyncWrap(adjustBrickStock));
 app.get('/restock', asyncWrap(restock));
+app.get('/auth_config.json', sendConfig);
 
 console.log("Server Listening!");
 app.listen(8080);

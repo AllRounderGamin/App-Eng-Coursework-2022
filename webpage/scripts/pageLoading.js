@@ -49,7 +49,12 @@ function loadHomePage() {
     groups.addEventListener("click", loadProductsPage);
     kits.addEventListener("click", loadProductsPage);
     BYOK.addEventListener("click", loadProductsPage);
-
+    const query = window.location.search;
+    if (query.includes("code=")) {
+        console.log("skipped pushstate");
+        return
+    }
+    console.log("PageLoading pushed state");
     history.pushState(null, "", "/");
 }
 
@@ -75,7 +80,6 @@ async function loadSearch() {
     const params = new URLSearchParams(window.location.search);
     const pageNum = params.get("pageNum") || 1;
     const query = params.get("query");
-    history.replaceState(null, "", "/?page=search&query=" + query + "&pageNum=" + pageNum);
     await fillProductsPage("http://localhost:8080/search/" + query + "/" + pageNum);
 
     const pageTracker = document.querySelector("#currentPage");
