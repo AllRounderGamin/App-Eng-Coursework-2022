@@ -26,7 +26,7 @@ export function verifyCardNum(e) {
 
 async function removeStock(cart) {
     for (let item of cart) {
-        const response = await fetch("http://localhost:8080/stock/" + item.name + "/" + item.amount);
+        await fetch("http://localhost:8080/stock/" + item.name + "/" + item.amount);
     }
 }
 
