@@ -41,36 +41,43 @@ function loadListPage() {
 function loadHomePage() {
     loadPage("landing");
     const single = document.querySelector("#singleBricks");
-    const groups = document.querySelector("#groupedBricks");
     const kits = document.querySelector("#legoKits");
-    const BYOK = document.querySelector("#buildYourOwn");
 
-    single.addEventListener("click", loadProductsPage);
-    groups.addEventListener("click", loadProductsPage);
-    kits.addEventListener("click", loadProductsPage);
-    BYOK.addEventListener("click", loadProductsPage);
+    single.addEventListener("click", loadSinglesPage);
+    kits.addEventListener("click", loadKitsPage);
     const query = window.location.search;
     if (query.includes("code=")) {
-        console.log("skipped pushstate");
         return
     }
-    console.log("PageLoading pushed state");
     history.pushState(null, "", "/");
 }
 
-async function loadProductsPage() {
+async function loadSinglesPage() {
     loadPage("products");
     const pageNum = new URLSearchParams((window.location.search)).get("pageNum") || 1;
-    history.replaceState(null, "", "/?page=products&pageNum=" + pageNum);
-    await fillProductsPage("http://localhost:8080/allproducts/" + pageNum);
+    history.replaceState(null, "", "/?page=singles&pageNum=" + pageNum);
+    await fillProductsPage("http://localhost:8080/products/singles/" + pageNum);
 
     const pageTracker = document.querySelector("#currentPage");
     pageTracker.textContent = "Current Page: " + pageNum;
 
 }
 
+async function loadKitsPage() {
+    loadPage("products");
+    const pageNum = new URLSearchParams((window.location.search)).get("pageNum") || 1;
+    history.replaceState(null, "", "/?page=kits&pageNum=" + pageNum);
+    await fillProductsPage("http://localhost:8080/products/kits/" + pageNum);
+
+    const pageTracker = document.querySelector("#currentPage");
+    pageTracker.textContent = "Current Page: " + pageNum;
+}
+
 async function searchStore() {
     const query = document.querySelector("#StoreSearch").value
+    if (query === "") {
+        return;
+    }
     history.replaceState(null, "", "/?page=search&query=" + query + "&pageNum=1");
     await loadFromUrl();
 }
@@ -153,8 +160,11 @@ export async function loadFromUrl() {
         case "checkout":
             loadCheckoutPage();
             break;
-        case "products":
-            await loadProductsPage();
+        case "singles":
+            await loadSinglesPage();
+            break;
+        case "kits":
+            await loadKitsPage();
             break;
         case "search":
             await loadSearch();

@@ -44,14 +44,18 @@ export async function fillProductsPage(url) {
 }
 
 async function loadPreviousPage() {
-    const currentPage = parseInt(new URLSearchParams(window.location.search).get("pageNum"));
-    window.history.replaceState(null, "", "?page=products&pageNum=" + (currentPage - 1));
+    const url = new URLSearchParams(window.location.search)
+    const currentPage = url.get("page");
+    const currentPageNum = parseInt(url.get("pageNum"));
+    window.history.replaceState(null, "", "?page=" + currentPage + "&pageNum=" + (currentPageNum - 1));
     await loadFromUrl();
 }
 
 async function loadNextPage() {
-    const currentPage = parseInt(new URLSearchParams(window.location.search).get("pageNum"));
-    window.history.replaceState(null, "", "?page=products&pageNum=" + (currentPage + 1));
+    const url = new URLSearchParams(window.location.search)
+    const currentPage = url.get("page");
+    const currentPageNum = parseInt(url.get("pageNum"));
+    window.history.replaceState(null, "", "?page=" + currentPage + "&pageNum=" + (currentPageNum + 1));
     await loadFromUrl();
 }
 
@@ -74,6 +78,7 @@ export async function fillProductInfo(params) {
         const stockAmount = document.querySelector("#stockAmount");
         const itemAmount = document.querySelector("#amount");
 
+        itemImage.classList.add("product");
         itemImage.src = product.src;
         itemName.textContent = product.name;
         itemPrice.textContent = "£" + product.price.toFixed(2);
@@ -91,11 +96,17 @@ export async function fillProductInfo(params) {
 
 export async function addProduct(e) {
     let amount = document.querySelector("#amount")
-    if (amount.value === 0 || amount > amount.max || amount < 1) {
+    let value = parseInt(amount.value);
+    const max = parseInt(amount.max);
+    if (value === 0 || isNaN(value)) {
+        value = 1;
+    }
+    console.log(value);
+    if (value > max || value < 1) {
         window.history.replaceState(null, "", "?page=error");
         await loadFromUrl();
         return;
     }
     const product = await findProduct(e.target.attributes.itemname.textContent);
-    await addToList(product, amount, e.target.attributes.listName.textContent, e.target.attributes.redirectLink.textContent);
+    await addToList(product, value, e.target.attributes.listName.textContent, e.target.attributes.redirectLink.textContent);
 }
