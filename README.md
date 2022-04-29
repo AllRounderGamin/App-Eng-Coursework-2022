@@ -62,9 +62,15 @@ As such it was deemed easier and more realistic that instead of a complex system
 
 ### Auth0
 
-The website does have capability to log in and out using the users at the end of this document, however as the project currently stands this changes nothing on the actual website.
+The website does have capability to log in and out using the users at the end of this section, however as the project currently stands this changes nothing on the actual website.
 With more tme the administrator account would have access to a store overview page which would be where restocks could be properly called (instead of just typing the url, this would also allow for some authorisation so random users cannot affect stock level), as well as an overview of the current state of the site.
 With a regular user account the database could be changed to include the data currently stored in LocalStorage into their own tables with a user_id that would allow only the logged in user to see their history / cart instead of anyone on that browser.
+
+administrator@bls.com
+@dministrator123
+
+shopper@bls.com
+P@ssword123
 
 ### Tags
 
