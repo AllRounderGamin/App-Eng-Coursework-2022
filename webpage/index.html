@@ -48,30 +48,28 @@
 </div>
 
 <nav>
-    <form>
-        <div id="Navigation">
+    <div id="Navigation">
 
-            <img alt="Placeholder Image" class="icon" id="homeButton" src="images/b%20logo.png">
+        <img alt="Placeholder Image" class="icon" id="homeButton" src="images/b%20logo.png">
 
-            <input aria-label="Search Through The Store" id="StoreSearch" placeholder="Search the Store!" required
-                   type="search">
+        <input aria-label="Search Through The Store" id="StoreSearch" placeholder="Search the Store!" required
+               type="search">
 
-            <button class="button" id="openSidebar" type="button">Tags</button>
+        <button class="button" id="openSidebar" type="button">Tags</button>
 
-            <input class="button" id="searchButton" type="submit" value="Search">
+        <input class="button" id="searchButton" type="submit" value="Search">
 
-            <button class="button" id="listButton" pageID="http://localhost:8080/listPage" type="button">Your
-                Lists
-            </button>
+        <button class="button" id="listButton" pageID="http://localhost:8080/listPage" type="button">Your
+            Lists
+        </button>
 
-            <button class="button" id="login" type="button">Login</button>
-            <button class="button" id="logout" type="button">Logout</button>
+        <button class="button" id="login" type="button">Login</button>
+        <button class="button" id="logout" type="button">Logout</button>
 
 
-            <img alt="Placeholder Image" class="icon" id="checkoutButton" src="images/cart.png">
+        <img alt="Placeholder Image" class="icon" id="checkoutButton" src="images/cart.png">
 
-        </div>
-    </form>
+    </div>
 
 </nav>
 
@@ -83,8 +81,8 @@
 
 <template id="landing">
     <div class="sections">
-        <img alt="Placeholder Image" class="sectionLink" id="singleBricks" src="images/single.jpg">
-        <img alt="Placeholder Image" class="sectionLink" id="legoKits" src="images/kits.jpg">
+        <img alt="Single Bricks" class="sectionLink" id="singleBricks" src="images/single.png">
+        <img alt="Lego Kits" class="sectionLink" id="legoKits" src="images/kits.png">
     </div>
 </template>
 
@@ -122,6 +120,7 @@
                 <label for="deliveryPostcode">Postcode</label>
                 <input id="deliveryPostcode" name="postcode" type="text">
             </div>
+            <button class="button" id="quickForm" type="button">Same as Delivery Address</button>
             <h3>Billing Address</h3>
             <div class="informationBox" id="billingInformation">
                 <label for="billingName">Name</label>

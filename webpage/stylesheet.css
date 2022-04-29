@@ -3,12 +3,11 @@
 }
 
 body {
-    background: indianred;
+    background: #e45757d6;
     margin: 0;
     height: 100%;
 }
 
-/* look into if max sizes affect anything */
 .icon {
     max-width: 50px;
     max-height: 100px;
@@ -37,13 +36,12 @@ body {
 .product {
     max-width: 90%;
     max-height: 100%;
-    border: 0.2em black outset;
+    padding: 10%;
 }
 
 .sectionLink {
     max-width: 70vw;
     max-height: 50vh;
-    border: 0.2em black outset;
     cursor: pointer;
 }
 
@@ -283,13 +281,3 @@ body {
     }
 
 }
-
-
-/* https://stackoverflow.com/questions/20505008/css-property-to-pad-text-inside-of-div
-Padding and Box Border
-
-    .sections {
-        display: flex;
-        flex-direction: column;
-    }
- */

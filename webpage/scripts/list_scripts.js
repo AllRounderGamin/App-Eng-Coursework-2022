@@ -119,7 +119,7 @@ export function loadPurchase(params) {
     items = items[num].cart;
     const list = document.querySelector(".ListArea");
     for (let item of items) {
-        const cumulativePrice = (item.singlePrice * item.amount);
+        const cumulativePrice = (item.price * item.amount);
         const itemName = item.name + " x" + item.amount.toString();
         const itemDiv = createDefaults(item, itemName, cumulativePrice, "?page=product&name=" + encodeURIComponent(item.name))
         totalAmount += cumulativePrice;
