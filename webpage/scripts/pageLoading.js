@@ -15,8 +15,8 @@ export function loadCheckoutPage() {
 
     const checkoutButton = document.querySelector("#confirmButton");
     checkoutButton.addEventListener("click", checkOut);
-    const cardNum = document.querySelector("#cardNum");
-    cardNum.addEventListener("change", verifyCardNum);
+    document.querySelector("#cardNum").addEventListener("change", verifyCardNum);
+    document.querySelector("#quickForm").addEventListener("click", quickFillForm);
 
     loadList("cart")
     if (!(localStorage.getItem("cart"))) {
@@ -26,25 +26,28 @@ export function loadCheckoutPage() {
     history.pushState(null, "", "/?page=checkout");
 }
 
+function quickFillForm() {
+    document.querySelector("#billingName").value = document.querySelector("#deliveryName").value;
+    document.querySelector("#billingLineOne").value = document.querySelector("#deliveryLineOne").value;
+    document.querySelector("#billingLineTwo").value = document.querySelector("#deliveryLineTwo").value;
+    document.querySelector("#billingCity").value = document.querySelector("#deliveryCity").value;
+    document.querySelector("#billingPostcode").value = document.querySelector("#deliveryPostcode").value;
+}
+
 function loadListPage() {
     loadPage("lists");
 
-    const wishButton = document.querySelector("#showWishlist");
-    const recentButton = document.querySelector("#showRecent");
-
-    wishButton.addEventListener("click", changeList);
-    recentButton.addEventListener("click", changeList);
+    document.querySelector("#showWishlist").addEventListener("click", changeList);
+    document.querySelector("#showRecent").addEventListener("click", changeList);
 
     history.pushState(null, "", "/?page=yourLists")
 }
 
 function loadHomePage() {
     loadPage("landing");
-    const single = document.querySelector("#singleBricks");
-    const kits = document.querySelector("#legoKits");
+    document.querySelector("#singleBricks").addEventListener("click", loadSinglesPage);
+    document.querySelector("#legoKits").addEventListener("click", loadKitsPage);
 
-    single.addEventListener("click", loadSinglesPage);
-    kits.addEventListener("click", loadKitsPage);
     const query = window.location.search;
     if (query.includes("code=")) {
         return
@@ -58,8 +61,7 @@ async function loadSinglesPage() {
     history.replaceState(null, "", "/?page=singles&pageNum=" + pageNum);
     await fillProductsPage("http://localhost:8080/products/singles/" + pageNum);
 
-    const pageTracker = document.querySelector("#currentPage");
-    pageTracker.textContent = "Current Page: " + pageNum;
+    document.querySelector("#currentPage").textContent = "Current Page: " + pageNum;
 
 }
 
@@ -69,8 +71,7 @@ async function loadKitsPage() {
     history.replaceState(null, "", "/?page=kits&pageNum=" + pageNum);
     await fillProductsPage("http://localhost:8080/products/kits/" + pageNum);
 
-    const pageTracker = document.querySelector("#currentPage");
-    pageTracker.textContent = "Current Page: " + pageNum;
+    document.querySelector("#currentPage").textContent = "Current Page: " + pageNum;
 }
 
 async function searchStore() {
@@ -89,8 +90,7 @@ async function loadSearch() {
     const query = params.get("query");
     await fillProductsPage("http://localhost:8080/search/" + query + "/" + pageNum);
 
-    const pageTracker = document.querySelector("#currentPage");
-    pageTracker.textContent = "Current Page: " + pageNum;
+    document.querySelector("#currentPage").textContent = "Current Page: " + pageNum;
 }
 
 async function loadProductPage() {
@@ -133,19 +133,12 @@ function sidebar() {
 }
 
 function setUp() {
-    const openSide = document.querySelector("#openSidebar");
-    const closeSide = document.querySelector("#closeSidebar");
-    const homeButton = document.querySelector("#homeButton");
-    const searchButton = document.querySelector("#searchButton")
-    const listButton = document.querySelector("#listButton");
-    const checkoutButton = document.querySelector("#checkoutButton");
-
-    openSide.addEventListener("click", sidebar);
-    closeSide.addEventListener("click", sidebar);
-    homeButton.addEventListener("click", loadHomePage);
-    searchButton.addEventListener("click", searchStore);
-    listButton.addEventListener("click", loadListPage);
-    checkoutButton.addEventListener("click", loadCheckoutPage);
+    document.querySelector("#openSidebar").addEventListener("click", sidebar);
+    document.querySelector("#closeSidebar").addEventListener("click", sidebar);
+    document.querySelector("#homeButton").addEventListener("click", loadHomePage);
+    document.querySelector("#searchButton").addEventListener("click", searchStore);
+    document.querySelector("#listButton").addEventListener("click", loadListPage);
+    document.querySelector("#checkoutButton").addEventListener("click", loadCheckoutPage);
 }
 
 export async function loadFromUrl() {
