@@ -61,7 +61,7 @@ async function loadNextPage() {
 }
 
 async function findProduct(name) {
-    const response = await fetch("http://localhost:8080/productinfo/" + encodeURIComponent(name));
+    const response = await fetch("productinfo/" + encodeURIComponent(name));
     return await response.json();
 }
 

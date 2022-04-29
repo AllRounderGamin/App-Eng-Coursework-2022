@@ -50,5 +50,5 @@ app.get('/stock/:item/:amount', asyncWrap(adjustBrickStock));
 app.get('/restock', asyncWrap(restock));
 app.get('/auth_config.json', sendConfig);
 
-console.log("Server Listening!");
+console.log("Server Listening on port 8080!");
 app.listen(8080);

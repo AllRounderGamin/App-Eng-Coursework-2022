@@ -59,7 +59,7 @@ async function loadSinglesPage() {
     loadPage("products");
     const pageNum = new URLSearchParams((window.location.search)).get("pageNum") || 1;
     history.replaceState(null, "", "/?page=singles&pageNum=" + pageNum);
-    await fillProductsPage("http://localhost:8080/products/singles/" + pageNum);
+    await fillProductsPage("products/singles/" + pageNum);
 
     document.querySelector("#currentPage").textContent = "Current Page: " + pageNum;
 
@@ -69,7 +69,7 @@ async function loadKitsPage() {
     loadPage("products");
     const pageNum = new URLSearchParams((window.location.search)).get("pageNum") || 1;
     history.replaceState(null, "", "/?page=kits&pageNum=" + pageNum);
-    await fillProductsPage("http://localhost:8080/products/kits/" + pageNum);
+    await fillProductsPage("products/kits/" + pageNum);
 
     document.querySelector("#currentPage").textContent = "Current Page: " + pageNum;
 }
@@ -88,7 +88,7 @@ async function loadSearch() {
     const params = new URLSearchParams(window.location.search);
     const pageNum = params.get("pageNum") || 1;
     const query = params.get("query");
-    await fillProductsPage("http://localhost:8080/search/" + query + "/" + pageNum);
+    await fillProductsPage("search/" + query + "/" + pageNum);
 
     document.querySelector("#currentPage").textContent = "Current Page: " + pageNum;
 }
