@@ -1,16 +1,17 @@
 # App-Eng Coursework
 
-For Jacek:
+## Documentation
 
-### To recreate issue:
+### Code
 
-    - Run server.js manually
-    - Go to localhost:8080
-    - Select top left image, and any image on the next page
-    - Change the "name" parameter in the url to something random
-    - Hit enter to search
-    - Page correctly navigates to the error page HOWEVER
-    in the console it shows an error where it tried to connect an event
-    to a no longer existing button
-    - When using console.log it was shown it was loading the product page
-    and then the error page immediately after
+### Server-Side
+
+* /productinfo/\<name>
+     * This will return the information related to the product specified in "name"
+* /products/singles/\<num>
+    * Returns 4 single bricks for the user to select from, the "num" parameter specifies the page number to load, which offsets the query by ```num * 4```
+* /products/kits/\<num>
+    * Same as above except this queries the kit database
+* /search/\<query>/\<num>
+    * Displays all stock with the query term inside it, the num attribute determines what page is shown in case there are more than 4 options
+

@@ -30,7 +30,9 @@ export async function adjustStock(brickName, amount) {
 export async function searchStock(query, offset) {
     const db = await dbConn;
     query = "%" + query + "%";
-    return db.all('SELECT * FROM Bricks WHERE name LIKE ? LIMIT 4 OFFSET ?', query, offset);
+    const bricks = await db.all('SELECT * FROM Bricks WHERE name LIKE ? LIMIT 4 OFFSET ?', query, offset);
+    const kits = await db.all('SELECT * FROM Kits WHERE name LIKE ? LIMIT 4 OFFSET ?', query, offset);
+    return bricks.concat(kits.slice(offset, offset + 4));
 }
 
 export async function restock() {
