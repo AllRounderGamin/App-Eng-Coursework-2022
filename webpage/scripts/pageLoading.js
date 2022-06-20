@@ -139,6 +139,10 @@ function setUp() {
     document.querySelector("#searchButton").addEventListener("click", searchStore);
     document.querySelector("#listButton").addEventListener("click", loadListPage);
     document.querySelector("#checkoutButton").addEventListener("click", loadCheckoutPage);
+    document.querySelector("#restockButton").addEventListener("click", async () =>
+    {await fetch("/restock", {method: "PUT", headers: {"Content-Type": "application/json"}, body: JSON.stringify({"brickAmount": 10000, "kitAmount": 50})})
+    window.history.replaceState(null, "", "/");
+    await loadFromUrl();})
 }
 
 export async function loadFromUrl() {

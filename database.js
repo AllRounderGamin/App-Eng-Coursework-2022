@@ -22,7 +22,6 @@ export async function findProduct(name) {
 export async function adjustStock(brickName, amount) {
     const db = await dbConn;
     const item = await findProduct(brickName);
-    console.log(item, brickName);
     const newStock = item.stock - amount;
     await db.run('UPDATE Bricks SET stock = ? WHERE name = ?', newStock, item.name);
     await db.run('UPDATE Kits SET stock = ? WHERE name = ?', newStock, item.name);
@@ -36,15 +35,15 @@ export async function searchStock(query, offset) {
     return bricks.concat(kits.slice(offset, offset + 4));
 }
 
-export async function restock() {
+export async function restock(brickAmount, kitAmount) {
     const db = await dbConn;
     const bricks = await db.all('SELECT * FROM Bricks');
     for (let item of bricks) {
-        await db.run('UPDATE Bricks SET stock=10000 WHERE name = ?', item.name);
+        await db.run('UPDATE Bricks SET stock=? WHERE name = ?', brickAmount, item.name);
     }
     const kits = await db.all('SELECT * FROM Kits');
     for (let item of kits) {
-        await db.run('UPDATE Kits SET stock=50 WHERE name = ?', item.name);
+        await db.run('UPDATE Kits SET stock=? WHERE name = ?', kitAmount, item.name);
     }
 }
 

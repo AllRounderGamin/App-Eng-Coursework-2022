@@ -29,14 +29,13 @@ async function searchStock(req, res) {
 }
 
 async function adjustBrickStock(req, res) {
-    console.log(req.body);
     await db.adjustStock(req.body.item, req.body.amount);
     res.sendStatus(200);
 }
 
 async function restock(req, res) {
-    await db.restock();
-    res.send("Shop Restocked!").status(200);
+    await db.restock(req.body.brickAmount, req.body.kitAmount);
+    res.sendStatus(200);
 }
 
 function sendConfig(req, res) {
@@ -48,7 +47,7 @@ app.get('/products/singles/:pageNum', asyncWrap(showAllSingles));
 app.get('/products/kits/:pageNum', asyncWrap(showAllKits));
 app.get('/search/:query/:pageNum', asyncWrap(searchStock))
 app.post('/stock', express.json(), asyncWrap(adjustBrickStock));
-app.get('/restock', asyncWrap(restock));
+app.put('/restock', express.json(), asyncWrap(restock));
 app.get('/auth_config.json', sendConfig);
 
 console.log("Server Listening on port 8080!");

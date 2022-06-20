@@ -4,7 +4,6 @@ import {loadFromUrl} from "./pageLoading.js";
 export async function fillProductsPage(url) {
     const productData = await fetch(url);
     const products = await productData.json();
-    console.log(products);
     const productPage = document.querySelector("#productPage");
     let finalPage = false;
     for (let i = 0; i < 4; i++) {
