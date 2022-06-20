@@ -22,6 +22,7 @@ export async function findProduct(name) {
 export async function adjustStock(brickName, amount) {
     const db = await dbConn;
     const item = await findProduct(brickName);
+    console.log(item, brickName);
     const newStock = item.stock - amount;
     await db.run('UPDATE Bricks SET stock = ? WHERE name = ?', newStock, item.name);
     await db.run('UPDATE Kits SET stock = ? WHERE name = ?', newStock, item.name);

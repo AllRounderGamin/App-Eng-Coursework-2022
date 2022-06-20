@@ -26,7 +26,10 @@ export function verifyCardNum(e) {
 
 async function removeStock(cart) {
     for (let item of cart) {
-        await fetch("stock/" + item.name + "/" + item.amount);
+        console.log(item);
+        await fetch("stock", {method: "POST",
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({"item": item.name, "amount": item.amount})});
     }
 }
 

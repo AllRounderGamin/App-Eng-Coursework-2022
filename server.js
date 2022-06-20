@@ -29,7 +29,8 @@ async function searchStock(req, res) {
 }
 
 async function adjustBrickStock(req, res) {
-    await db.adjustStock(req.params.item, req.params.amount);
+    console.log(req.body);
+    await db.adjustStock(req.body.item, req.body.amount);
     res.sendStatus(200);
 }
 
@@ -46,7 +47,7 @@ app.get('/productinfo/:product', asyncWrap(findItem));
 app.get('/products/singles/:pageNum', asyncWrap(showAllSingles));
 app.get('/products/kits/:pageNum', asyncWrap(showAllKits));
 app.get('/search/:query/:pageNum', asyncWrap(searchStock))
-app.get('/stock/:item/:amount', asyncWrap(adjustBrickStock));
+app.post('/stock', express.json(), asyncWrap(adjustBrickStock));
 app.get('/restock', asyncWrap(restock));
 app.get('/auth_config.json', sendConfig);
 
