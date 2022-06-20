@@ -101,7 +101,6 @@ export async function addProduct(e) {
     if (value === 0 || isNaN(value)) {
         value = 1;
     }
-    console.log(value);
     if (value > max || value < 1) {
         window.history.replaceState(null, "", "?page=error");
         await loadFromUrl();
